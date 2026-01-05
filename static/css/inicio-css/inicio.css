@@ -1,0 +1,171 @@
+body{
+    margin: 0;
+    padding: 0;
+    height: 400vh;
+    font-family: Arial, Helvetica, sans-serif;
+}
+/* toda esta parte sera el encabezado*/
+header{
+    width: 98.9vw;
+    height: 25vh;
+    background-color: blue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-image: url(/image/header/header.avif);
+    box-shadow: 1px 1px 3px  black;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000; /* Para que quede sobre otros elementos */
+}
+.icon-logo{
+    width: 100px;
+    height: 100px;
+    box-shadow: 0.5px 0.5px 10px  black;
+    margin-left: 20px;
+    border-radius: 50%;
+}
+.logo{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+}
+.title-header{
+    width: 30%;
+    height: 100px;
+    background-color: rgb(107, 22, 11,0.2);
+    box-shadow: 0.5px 0.5px 10px  black;
+    border-radius: 25px;
+    color: white;
+}
+/*titulo de la pagina*/
+.title-main-page{
+    margin: 10px;
+    text-align: center;
+}
+.nav-header{
+    width: 50%;
+    height: 100px;
+    background-color: rgb(255, 255, 255,0.3);
+    box-shadow: 0.5px 0.5px 10px  black;
+    border-radius: 25px;
+    margin-right: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+/*seccion del enlace del perfil*/
+.S-A{
+    width: 30%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 25px;
+    margin-right: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*seccion de la barra de busqueda*/
+.S-buscador{
+    background-color: rgba(0,0,0,0.5);
+    border-radius: 25px;
+    width: 60%;
+    height: 80%;
+    margin-left: 4%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*las dos seccion del buscador*/
+.to-search, .search{
+    height: 40%;
+}
+.to-search{
+    margin-left: 5%;
+    width: 70%;
+    border-radius: 15px;
+    border: none;
+    box-shadow: 1px 1px 3px  black;
+    font-size: 1.1rem;
+}
+.search{
+    margin-left: 5%;
+    margin-right: 5%;
+    border: none;
+    border-radius: 15px;
+    height: 40%;
+    width: 20%;
+    outline:none;
+}
+.search:hover{
+    background-color: rgb(92, 9, 9);
+    color: white;
+    cursor: pointer;
+}
+.to-search:focus{
+    outline: none;
+}
+/*contenedor de perfil*/
+.div-profile{
+    width: 90%;
+    height: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*Texto TRu Perfil moderar el tamaño*/
+.label-profile{
+    font-size: 1rem;
+}
+.profile-a{
+    cursor: pointer;
+    padding: 10px 10px 10px 10px;
+    color: rgb(92, 9, 9);
+}
+/* hasta aqui termina lso estilos del encabezaado*/
+/*Estilos para el area principal v*/
+main{
+    width: 98.9vw;
+    height: 95%;
+    margin-top: 25vh;
+    overflow: hidden;
+}
+/* pie de pagina */
+footer{
+    background: linear-gradient(rgb(92, 9, 9) 0%, rgb(0, 0, 0)100%);
+    width: 98.9vw;
+    height: 5%;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.div-title-contact, .nav-info-contact{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    width: 30%;
+}
+.div-title-contact{
+    background-color: rgba(92, 92, 92, 0.5);
+    height: 50%;
+}
+.nav-info-contact{
+    height: 50%;
+    background-color: rgba(92, 92, 92,0.5);
+    margin-left: 50px;
+}
+ul{
+    text-decoration: none;
+    list-style: none;
+    position: relative;
+}
+.a-gmail{
+    color: white;
+}
+.a-gmail:hover{
+    cursor: pointer;
+    color: rgb(92, 9, 9);
+}
