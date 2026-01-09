@@ -1,0 +1,161 @@
+@media (min-width: 376px) and (max-width: 425px) {
+    /* toda esta parte sera el encabezado*/
+    header{
+        height: 15vh;
+    }
+    header :is(.icon-logo){
+        width: 50px;
+        height: 50px;
+        margin-left: 10px;
+    }
+    :is(.icon-logo) :is(.logo){
+        width: 50px;
+        height: 50px;
+    }
+    header :is(.title-header){
+        width: 30%;
+        height: 50px;
+    }
+    /*titulo de la pagina*/
+    .title-main-page{
+        margin: 10px;
+        text-align: center;
+        font-size: 10px;
+    }
+    header :is(.nav-header){
+        width: 50%;
+        height: 50px;
+        margin-right: 20px;
+    }
+    /*seccion del enlace del perfil*/
+    .S-A{
+        width: 30%;
+        height: 80%;
+        background-color: rgba(255, 255, 255, 0.5);
+        border-radius: 25px;
+        margin-right: 4%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /*seccion de la barra de busqueda*/
+    .S-buscador{
+        background-color: rgba(0,0,0,0.5);
+        border-radius: 25px;
+        width: 60%;
+        height: 80%;
+        margin-left: 4%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /*las dos seccion del buscador*/
+    .to-search, .search{
+        height: 40%;
+    }
+    .to-search{
+        margin-left: 5%;
+        width: 70%;
+        border-radius: 15px;
+        border: none;
+        box-shadow: 1px 1px 3px  black;
+        font-size: 1.1rem;
+    }
+    .search{
+        margin-left: 5%;
+        margin-right: 5%;
+        border: none;
+        border-radius: 15px;
+        height: 40%;
+        width: 20%;
+        outline:none;
+    }
+    .search:hover{
+        background-color: rgb(92, 9, 9);
+        color: white;
+        cursor: pointer;
+    }
+    .to-search:focus{
+        outline: none;
+    }
+    /*contenedor de perfil*/
+    .div-profile{
+        width: 90%;
+        height: 20%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    /*Texto TRu Perfil moderar el tamaño*/
+    .label-profile{
+        font-size: 14px;
+    }
+    .profile-a{
+        cursor: pointer;
+        color: rgb(56, 0, 102);
+    }
+    .profile-a:hover{
+        color: rgb(92, 9, 9);
+    }
+    /* hasta aqui termina lso estilos del encabezaado*/
+    /*Estilos para el area principal v*/
+    .difuminados{
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        overflow: hidden;
+        z-index: -1;
+    }
+    main{
+        width: 100vw;
+        height: 95%;
+        margin-top: 15vh;
+        overflow: hidden;
+    }
+    /* pie de pagina */
+    footer{
+        background: linear-gradient(rgb(92, 9, 9) 0%, rgb(0, 0, 0)100%);
+        width: 100vw;
+        height: 5%;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .div-title-contact, .nav-info-contact{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border-radius: 15px;
+        width: 30%;
+    }
+    .div-title-contact{
+        background-color: rgba(92, 92, 92, 0.5);
+        height: 50%;
+    }
+    .nav-info-contact{
+        height: 50%;
+        background-color: rgba(92, 92, 92,0.5);
+        margin-left: 50px;
+    }
+    ul{
+        text-decoration: none;
+        list-style: none;
+        position: relative;
+    }
+    .a-gmail{
+        color: white;
+    }
+    .a-gmail:hover{
+        cursor: pointer;
+        color: rgb(92, 9, 9);
+    }
+    li:nth-child(2){
+        margin-top: 5px;
+    }
+    ul li{
+        margin-left: -40px;
+    }
+}

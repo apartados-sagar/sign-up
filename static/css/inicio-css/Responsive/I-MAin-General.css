@@ -1,12 +1,19 @@
+@import url(I-R-Mobile-S-320PX.css);
+@import url(I-R-Mobile-M-375PX.css);
+@import url(I-R-Mobile-L-425PX.css);
+@import url(I-R-Tablet-768PX.css);
+@import url(I-R-Laptop-1024PX.css);
+@import url(I-R-Laptop-L-1440PX.css);
 body{
     margin: 0;
     padding: 0;
+    width: 100vw;
     height: 400vh;
     font-family: Arial, Helvetica, sans-serif;
 }
 /* toda esta parte sera el encabezado*/
-header{
-    width: 98.9vw;
+:where(header){
+    width: 100vw;
     height: 25vh;
     background-color: blue;
     display: flex;
@@ -38,6 +45,9 @@ header{
     box-shadow: 0.5px 0.5px 10px  black;
     border-radius: 25px;
     color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 /*titulo de la pagina*/
 .title-main-page{
@@ -116,17 +126,28 @@ header{
 }
 /*Texto TRu Perfil moderar el tamaño*/
 .label-profile{
-    font-size: 1rem;
+    font-size: 14px;
 }
 .profile-a{
     cursor: pointer;
-    padding: 10px 10px 10px 10px;
+    color: rgb(56, 0, 102);
+}
+.profile-a:hover{
     color: rgb(92, 9, 9);
 }
 /* hasta aqui termina lso estilos del encabezaado*/
 /*Estilos para el area principal v*/
-main{
-    width: 98.9vw;
+.difuminados{
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    overflow: hidden;
+    z-index: -1;
+}
+:where(main){
+    width: 100vw;
     height: 95%;
     margin-top: 25vh;
     overflow: hidden;
@@ -134,7 +155,7 @@ main{
 /* pie de pagina */
 footer{
     background: linear-gradient(rgb(92, 9, 9) 0%, rgb(0, 0, 0)100%);
-    width: 98.9vw;
+    width: 100vw;
     height: 5%;
     color: white;
     display: flex;
@@ -169,3 +190,10 @@ ul{
     cursor: pointer;
     color: rgb(92, 9, 9);
 }
+li:nth-child(2){
+    margin-top: 5px;
+}
+ul li{
+    margin-left: -40px;
+}
+

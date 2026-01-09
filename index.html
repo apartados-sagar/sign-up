@@ -4,96 +4,32 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>registrarse</title>
-    <link rel="stylesheet" href="static/css/style.css">
+    <link rel="stylesheet" href="static/css/sing-up/S-MAin-General.css">
 </head>
 <body>
-    <div class="Terminos">
-        <header>
-            <h1 class="title-terminos">Término y Condiciones del Servicio de Apartados Sagar</h1>
-        </header>
-        <main>
-            <div class="content-info">
-                <div class="cuerpo-texto">
-                    <h2>Nuestra Cobertura</h2>
-                    <ul>
-                        <li><strong>Zonas de Cobertura:</strong> San Pedro Sula, Cortés.</li>
-                        <li><strong>Zonas No Cubiertas:</strong> Los pedidos no se entregarán fuera del Centro.</li>
-                        <li><strong>Días de entrega:</strong> Sábado, Domingo y Lunes.</li>
-                        <li><strong>Costos de Envío:</strong> No Aplica.</li>
-                        <li><strong>Puntos de Entrega:</strong> Nos pondremos en contacto para discutir el punto de entrega.</li>
-                    </ul>
-                    
-                    <p>Este es un servicio de apartados, No se compra inmediatamente, Usted pedirá un producto y nosotros se lo apartamos, señalando que la disponibilidad de los productos depende de nuestra fuentes.</p>
-                    <div class="p-linear"></div>
-                    <h2>Proceso:</h2>
-                    <ol>
-                        <li>Usted solicita el apartado.</li>
-                        <li>Nosotros confirmamos disponibilidad del producto y precio final.</li>
-                        <li>Usted confirma el pedido.</li>
-                        <li>Procedemos con la reserva.</li>
-                        <li>y coordinamos la entrega contactandonos previamente.</li>
-                    </ol>
-                    <div class="p-linear"></div>
-                    <h2>Métodos de Pago y Seguridad</h2>
-                    <p>Este sitio web NO solicita, procesa ni almacena información bancaria o de tarjetas de crédito. Cualquier pago relacionado con su apartado se coordinará fuera de la plataforma, mediante métodos seguros y acordados personalmente (efectivo, transferencia directa a cuenta bancaria oficial, etc.) al momento de confirmar su pedido. Desconfíe de cualquier mensaje o persona que, supuestamente en nuestro nombre, le pida datos financieros a través de este sitio.</p>
-                    <div class="p-linear"></div>
-                    <h2>Advertencia de Seguridad</h2>
-                    <h4>Puntos a Incluir:</h4>
-                        <ul>
-                            <li>Nunca realices pagos anticipados a cuentas personales no verificadas.</li>
-                            <li>La comunicación oficial para confirmar pagos y detalles siempre será a través de los canales establecidos (número de WhatsApp oficial y correo electrónico).</li>
-                            <li>No compartas códigos, claves o datos personales financieros por mensaje.</li>
-                            <li>Si tienes dudas, contacta directamente a nuestro número oficial publicado en la sección "Contactos".</li>
-                        </ul>
-                    <div class="p-linear"></div>
-                    <h2>Política en Responsabilidades</h2>
-                    <h4>Aclarar que:</h4>
-                        <ul>
-                            <li>fotos de los productos son ilustrativas y pueden tener ligeras variaciones.</li>
-                            <li>Los tiempos de entrega son estimados y pueden verse afectados por factores fuera de su control.</li>
-                            <li>El cliente es responsable de proporcionar datos de contacto y la dirección correcta para la entrega.</li>
-                        </ul>   
-                    <div class="p-linear"></div>
-                    <h2>Política de Cancelaciones y Cambios</h2>
-                    <h4>claramente que:</h4>
-                        <ul>
-                            <li>No se aceptan devoluciones dentro las últimas horas de entrega.</li>
-                            <li>Se Aceptan Cambios y modificación, Si hay accesibilidad en el producto y de antemano se notificó la solicitud.</li>
-                            <li>Se requiere una compensación, si el cliente Cancela Abruptamente el pedido.</li>
-                        </ul>
-                    <div class="p-linear"></div>
-                    <h2>Contactos para Dudas</h2>
-                    Whatsapp:  8794-6390
-                    Correo electrónico: 
-                    <div class="p-linear"></div>
-                </div>
-            </div>
-        </main>
-        <footer>
-            <input type="checkbox" name="condiciones" id="chk-confirmar">Confirme los Terminos y Condiciones
-        </footer>
-    </div>
-
-
-
-
-
     <div class="register">
-        <h1 class="title-main">Únace y Cree su <strong>Perfil!!!</strong></h1>
+        <section class="section">
+            <h1 class="title-main">Crea tu Perfil</h1>
+        </section>
         <section class="section">
             <div>
                 <label>Ingrese su Apodo</label>
-                <input type="text" id="apodo" placeholder="ingrese su apodo creativo">
+                <input type="text" id="apodo" placeholder=" ingrese su apodo creativo">
             </div>
         </section>
         <section class="section">
             <div>
                 <label>Ingrese su Contraseña</label>
-                <input type="text" id="contraseña" placeholder="Crea una Contraseña segura">
+                <input type="text" id="contraseña" placeholder=" Crea una Contraseña segura">
             </div>
         </section>
         <section class="section">
-            <button onclick="register()"><a href="Inicio.html">Siguiente</a></button>
+            <div class="boton-siguiente">
+                <button onclick="register()"><a href="Inicio.html">Siguiente</a></button>
+                <div class="div-chk">
+                    <p><input type="checkbox" class="input-chk" id="termino-chk">Revice nuestros <a href="Terminos.html">Términos y Condiciones</a></p>
+                </div>
+            </div>
         </section>
     </div>
     <script src="static/js/script.js"></script>

@@ -1,0 +1,40 @@
+/*Resolucion en dispositivos pequeños*/
+@media (max-width: 320px){
+    /*Encabezado de los terminos*/
+    body{
+        font-size: 11px;
+    }
+    footer{
+        height: 10%;
+    }
+    .content-info{
+        width: 90%;
+        height: 90%;
+        overflow: scroll;
+        scrollbar-width: none;
+        color: rgb(0, 0, 0);
+    }
+    .cuerpo-texto{
+        width: 90%;
+        height: 85%;
+        margin-left: 5%;
+        font-size: 12px;
+    }
+    .title-terminos{
+        margin-top: 15px;
+        text-align: center;
+    }
+    ol li, ul li{
+        margin-left: -15px;
+    }
+    h2{
+        font-size: 18px;
+    }
+    h4{
+        margin-bottom: -7px;
+    }
+    .a-volver{
+        width: 100px;
+        height: 70%;
+    }
+}
