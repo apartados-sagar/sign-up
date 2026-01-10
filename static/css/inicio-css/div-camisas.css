@@ -75,33 +75,7 @@
     border-radius: 15px;
     margin-right: 15px;
 }
-/*controles de movimiento*/
-.div-controles-rigth, .div-controles-left{
-    width: 40px;
-    height: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    border-radius: 50%;
-    position: relative;
-}
-.div-controles-rigth, .div-controles-left:hover{
-    cursor: pointer;
-}
-.div-controles-rigth{
-    left: 95.5%;
-    top: 45%;
-}
-.div-controles-left{
-    left: 1%;
-    top: 28%;
-}
-/*Imganes de flechas*/
-.img-arrow{
-    width: 40px;
-    height: 40px;
-    opacity: 0.9;
-}
+
 /*Titulos generales para todas las secciones*/
 .section-title-general{
     width: 20%;

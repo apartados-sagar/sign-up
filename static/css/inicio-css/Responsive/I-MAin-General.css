@@ -29,13 +29,16 @@ body{
 .icon-logo{
     width: 100px;
     height: 100px;
-    box-shadow: 0.5px 0.5px 10px  black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     margin-left: 20px;
     border-radius: 50%;
 }
 .logo{
     width: 100px;
     height: 100px;
+    box-shadow: 0.5px 0.5px 10px  black;
     border-radius: 50%;
 }
 .title-header{
@@ -105,8 +108,7 @@ body{
     border: none;
     border-radius: 15px;
     height: 40%;
-    width: 20%;
-    outline:none;
+    width: 30%;
 }
 .search:hover{
     background-color: rgb(92, 9, 9);
@@ -195,5 +197,34 @@ li:nth-child(2){
 }
 ul li{
     margin-left: -40px;
+}
+
+/*controles de movimiento*/
+.div-controles-rigth, .div-controles-left{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    position: relative;
+}
+.div-controles-rigth, .div-controles-left{
+    cursor: pointer;
+}
+.div-controles-rigth{
+    left: 86.5%;
+    top: 43%;
+}
+.div-controles-left{
+    left: 1%;
+    top: 25%;
+}
+/*Imganes de flechas*/
+.img-arrow{
+    width: 30px;
+    height: 30px;
+    padding: 5px;
+    opacity: 0.9;
 }
 

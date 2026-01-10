@@ -1,52 +1,60 @@
 @media (min-width: 376px) and (max-width: 425px) {
     /* toda esta parte sera el encabezado*/
     header{
-        height: 15vh;
+        height: 20vh;
     }
     header :is(.icon-logo){
-        width: 50px;
-        height: 50px;
+        width: 70px;
         margin-left: 10px;
     }
-    :is(.icon-logo) :is(.logo){
-        width: 50px;
-        height: 50px;
+    header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
+        height: 90%;
+    }
+    header :is(.icon-logo) :is(.logo){
+        width: 70px;
+        height: 70px;
+        margin-right: 10px;
     }
     header :is(.title-header){
         width: 30%;
-        height: 70px;
     }
     .div-profile :is(.label-profile){
-        font-size: 10px;
+        font-size: 14px;
         padding-left: 5px;
     }
     .p-profile-header{
-        font-size: 10px;
+        font-size: 14px;
         text-align: center;
     }
     /*titulo de la pagina*/
-    .title-main-page{
+    .title-header :is(.title-main-page){
         margin: 10px;
         text-align: center;
-        font-size: 10px;
+        font-size: 14px;
     }
     header :is(.nav-header){
         width: 50%;
-        height: 70px;
-        margin-right: 20px;
+        margin-right: 10px;
+        margin-left: 10px;
     }
     header :is(.nav-header){
         flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
     }
     /*seccion del enlace del perfil*/
+    .nav-header :is(.S-A), .nav-header :is(.S-buscador){
+        height: 45%;
+    }
     header :is(.S-A){
         width: 90%;
-        height: 45%;
+        margin-right: 0;
     }
     /*seccion de la barra de busqueda*/
     header :is(.S-buscador){
         width: 90%;
-        height: 50%;
+        margin-left: 0;
+        margin-top: 5px;
     }
     /*las dos seccion del buscador*/
     .to-search, .search{
@@ -61,12 +69,6 @@
         font-size: 1.1rem;
     }
     .search{
-        margin-left: 5%;
-        margin-right: 5%;
-        border: none;
-        border-radius: 15px;
-        height: 40%;
-        width: 20%;
         outline:none;
     }
     .search:hover{
@@ -110,29 +112,26 @@
     main{
         width: 100vw;
         height: 95%;
-        margin-top: 15vh;
+        margin-top: 20vh;
         overflow: hidden;
     }
     /* pie de pagina */
-    footer{
-        background: linear-gradient(rgb(92, 9, 9) 0%, rgb(0, 0, 0)100%);
-        width: 100vw;
-        height: 5%;
-        color: white;
-        display: flex;
+    body footer{
         justify-content: center;
+
         align-items: center;
+        flex-direction: row;
     }
-    .div-title-contact, .nav-info-contact{
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border-radius: 15px;
-        width: 30%;
+    footer :is(.div-title-contact), footer :is(.nav-info-contact){
+        width: 45%;
     }
     .div-title-contact{
         background-color: rgba(92, 92, 92, 0.5);
         height: 50%;
+        
+    }
+    .div-title-contact :is(.h1-title){
+        font-size: 18px;
     }
     .nav-info-contact{
         height: 50%;
@@ -143,6 +142,9 @@
         text-decoration: none;
         list-style: none;
         position: relative;
+    }
+    section :is(.section-title-general){
+        font-size: 14px;
     }
     .a-gmail{
         color: white;
@@ -156,5 +158,64 @@
     }
     ul li{
         margin-left: -40px;
+        font-size: 10px;
+    }
+    /*camisas difuminado....................................................*/
+    :is(.div-camisas) .difuminado:nth-of-type(1){
+        width: 200px;
+        height: 200px;
+    }
+    :is(.div-camisas) .difuminado:nth-of-type(2){
+        width: 100px;
+        height: 100px;
+    }
+    :is(.div-camisas) .difuminado:nth-of-type(3){
+        width: 250px;
+        height: 250px;
+    }
+    /*camiPantalones difuminado....................................................*/
+    :is(.div-pantalones) .difuminado:nth-of-type(1){
+        width: 200px;
+        height: 200px;
+    }
+    :is(.div-pantalones) .difuminado:nth-of-type(2){
+        width: 100px;
+        height: 100px;
+    }
+    :is(.div-pantalones) .difuminado:nth-of-type(3){
+        width: 300px;
+        height: 300px;
+    }
+    /*Perfumeria difuminado....................................................*/
+    :is(.div-perfumeria) .difuminado:nth-of-type(1){
+        width: 200px;
+        height: 200px;
+    }
+    :is(.div-perfumeria) .difuminado:nth-of-type(2){
+        width: 100px;
+        height: 100px;
+    }
+    :is(.div-perfumeria) .difuminado:nth-of-type(3){
+        width: 300px;
+        height: 300px;
+    }
+    /*controles de movimiento*/
+    .div-controles-rigth, .div-controles-left{
+        width: 40px;
+        height: 40px;
+    }
+    .div-controles-rigth{
+        left: 95.5%;
+        top: 45%;
+    }
+    .div-controles-left{
+        left: 1%;
+        top: 28%;
+    }
+    /*Imganes de flechas*/
+    .img-arrow{
+        width: 40px;
+        height: 40px;
+        opacity: 0.9;
     }
 }
