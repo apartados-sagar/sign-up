@@ -195,7 +195,7 @@ ul{
     list-style: none;
     position: relative;
 }
-.a-gmail{
+:where(.a-gmail){
     color: white;   
     font-size: 22px;
 }
@@ -251,18 +251,6 @@ body main{
 header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
     height: 80%;
 }
-header :is(.icon-logo) :is(.logo){
-    width: 150px;
-    height: 150px;
-    margin-left: 30px;
-}
-/*Texto TRu Perfil moderar el tamaño*/
-.S-A .label-profile{
-    font-size: 20px;
-}
-.div-profile .p-profile-header{
-    font-size: 22px;
-}
 
 /*titulo de la pagina*/
 .title-main-page{
@@ -271,10 +259,6 @@ header :is(.icon-logo) :is(.logo){
 .nav-header .S-buscador .to-search{
     margin-left: 5%;
     width: 70%;
-    font-size: 20px;
-}
-.S-buscador .search{
-    outline:none;
     font-size: 20px;
 }
 /*titulo del pie de pagina*/

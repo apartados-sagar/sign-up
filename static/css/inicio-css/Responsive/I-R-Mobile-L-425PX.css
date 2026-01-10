@@ -128,9 +128,10 @@
     section :is(.section-title-general){
         font-size: 14px;
     }
-    .a-gmail{
+    ul .a-gmail{
         color: white;
         width: 95%;
+        font-size: 10px;
     }
     li:nth-child(2){
         margin-top: 5px;
