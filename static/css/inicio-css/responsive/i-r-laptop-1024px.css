@@ -1,0 +1,27 @@
+ @media (min-width: 769px) and (max-width: 1024px) {
+    /*titulo de la pagina*/
+    .title-main-page{
+        font-size: 24px;
+    }
+    /*titulo del pie de pagina*/
+    .h1-title{
+        font-size: 24px;
+        text-align: center;
+    }
+    /*enlaces de ruta*/
+    .div-center-footer .a-gmail{
+        font-size: 11px;
+    }
+    .search{
+        font-size: 11px;
+    }
+    /*texto perfil*/
+    .div-profile{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    .profile-a{
+        padding-left: 5px;
+    }
+}

@@ -1,0 +1,183 @@
+@media (min-width: 300px) and (max-width: 320px) {
+    /* toda esta parte sera el encabezado*/
+    header{
+        height: 20vh;
+    }
+    header :is(.icon-logo){
+        width: 70px;
+        margin-left: 10px;
+    }
+    header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
+        height: 90%;
+    }
+    header :is(.icon-logo) :is(.logo){
+        width: 70px;
+        height: 70px;
+        margin-right: 10px;
+    }
+    header :is(.title-header){
+        width: 30%;
+    }
+    .div-profile :is(.label-profile){
+        font-size: 12px;
+        padding-left: 5px;
+    }
+    .p-profile-header{
+        font-size: 12px;
+        text-align: center;
+    }
+    /*titulo de la pagina*/
+    .title-header :is(.title-main-page){
+        margin: 10px;
+        text-align: center;
+        font-size: 14px;
+    }
+    header :is(.nav-header){
+        width: 50%;
+        margin-right: 10px;
+        margin-left: 10px;
+    }
+    header :is(.nav-header){
+        flex-direction: column-reverse;
+        justify-content: center;
+        align-items: center;
+    }
+    /*seccion del enlace del perfil*/
+    .nav-header :is(.S-A), .nav-header :is(.S-buscador){
+        height: 45%;
+    }
+    header :is(.S-A){
+        width: 90%;
+        margin-right: 0;
+    }
+    /*seccion de la barra de busqueda*/
+    header :is(.S-buscador){
+        width: 97%;
+        margin-left: 0;
+        margin-top: 5px;
+    }
+    /*las dos seccion del buscador*/
+    .to-search, .search{
+        height: 40%;
+    }
+    .S-buscador .to-search{
+        margin-left: 5%;
+        width: 70%;
+        font-size: 12px;
+    }
+    .search{
+        outline:none;
+        font-size: 10px;
+    }
+    /*contenedor de perfil*/
+    .div-profile{
+        width: 90%;
+        height: 20%;
+    }
+    /*Texto TRu Perfil moderar el tamaño*/
+    .label-profile{
+        font-size: 14px;
+    }
+    .profile-a{
+        cursor: pointer;
+        color: rgb(56, 0, 102);
+    }
+    .profile-a:hover{
+        color: rgb(92, 9, 9);
+    }
+    /* hasta aqui termina lso estilos del encabezaado*/
+    /*Estilos para el area principal v*/
+    .difuminados{
+        position: absolute;
+    }
+    main{
+        width: 100vw;
+        height: 95%;
+        margin-top: 20vh;
+        overflow: hidden;
+    }
+    /* pie de pagina */
+    body footer{
+        justify-content: center;
+        width: 100vw;
+        align-items: center;
+        flex-direction: row;
+    }
+    footer :is(.div-title-contact), footer :is(.nav-info-contact){
+        width: 45%;
+    }
+    .div-title-contact{
+        background-color: rgba(92, 92, 92, 0.5);
+        height: 50%;
+        
+    }
+    .div-title-contact :is(.h1-title){
+        font-size: 18px;
+        text-align: center;
+    }
+    footer .div-title-contact{
+        margin-left: 15px;
+    }
+    footer .nav-info-contact{
+        margin-left: 10px;
+    }
+    ul{
+        text-decoration: none;
+        list-style: none;
+        position: relative;
+    }
+    section :is(.section-title-general){
+        font-size: 12px;
+    }
+    .a-gmail{
+        color: white;
+        width: 95%;
+    }
+    li:nth-child(2){
+        margin-top: 5px;
+    }
+    .div-center-footer ul :is(li){
+        margin-left: -27px;
+        font-size: 10px;
+    }
+    /*camisas difuminado....................................................*/
+    :is(.div-camisas) .difuminado:nth-of-type(1){
+        width: 150px;
+        height: 150px;
+    }
+    :is(.div-camisas) .difuminado:nth-of-type(2){
+        width: 50px;
+        height: 50px;
+    }
+    :is(.div-camisas) .difuminado:nth-of-type(3){
+        width: 200px;
+        height: 200px;
+    }
+    /*camiPantalones difuminado....................................................*/
+    :is(.div-pantalones) .difuminado:nth-of-type(1){
+        width: 150px;
+        height: 150px;
+    }
+    :is(.div-pantalones) .difuminado:nth-of-type(2){
+        width: 50px;
+        height: 50px;
+    }
+    :is(.div-pantalones) .difuminado:nth-of-type(3){
+        width: 200px;
+        height: 200px;   
+        left: 1px;
+    }
+    /*Perfumeria difuminado....................................................*/
+    :is(.div-perfumeria) .difuminado:nth-of-type(1){
+        width: 150px;
+        height: 150px;
+    }
+    :is(.div-perfumeria) .difuminado:nth-of-type(2){
+        width: 50px;
+        height: 50px;
+    }
+    :is(.div-perfumeria) .difuminado:nth-of-type(3){
+        width: 200px;
+        height: 200px;
+    }
+}

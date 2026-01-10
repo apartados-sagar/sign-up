@@ -1,0 +1,107 @@
+@media (max-width: 1440px) {
+    body{
+    margin: 0;
+    padding: 0;
+    background: white;
+    color: rgb(0, 0, 0);
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: rgb(75, 75, 75);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100vh;
+}
+/*Mensaje de aviso condiciones y sugerencias*/
+header, main, footer{
+    background-color: white;
+    width: 80%;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/*Encabezado de los terminos*/
+header{
+    height: 15%;
+}
+main{
+    
+    height: 75%;
+    display: flex;
+    justify-content: center;
+    align-items:center;
+}
+footer{
+    height: 10%;
+    display: flex;
+    align-items:center;
+    
+}
+.title-terminos{
+    margin: 0;
+    z-index: 1;
+    text-align: center;
+    margin-top: 15px;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+.content-info{
+    width: 80%;
+    height: 90%;
+    overflow: scroll;
+    scrollbar-width: none;
+    color: rgb(0, 0, 0);
+}
+/*el parrafo de todos los datos*/
+.cuerpo-texto{
+    width: 90%;
+    height: 85%;
+    margin-left: 5%;
+    text-align: left;
+    font-size: 12px;
+}
+
+
+input[type="checkbox"]{
+    margin-left: 5%;
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+}
+.a-volver{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 70%;
+    cursor: pointer;
+    text-decoration: none;
+    background-color: rgb(75, 75, 75);
+    color: rgb(255, 255, 255);
+    border-radius: 15px;
+}
+.a-volver:hover{
+    background-color: rgb(59, 7, 7);
+    transition: 0.3s;
+}
+
+ol li, ul li{
+    margin-left: -15px;
+}
+h2{
+    font-size: 18px;
+}
+h4{
+    margin-bottom: -7px;
+}
+p{
+    text-align: justify;
+}
+.a-contactos{
+    color: rgb(17, 0, 255);
+}
+.a-contactos:hover{
+    color: rgb(59, 7, 7);
+}
+}
