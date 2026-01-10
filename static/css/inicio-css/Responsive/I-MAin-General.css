@@ -19,7 +19,10 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image: url(/image/header/header.avif);
+    background-image: -webkit-image-set(
+        url("/image/header/header.avif") type("image/avif"),
+        url("/image/header/header.jpg") type("image/jpeg")
+    );
     box-shadow: 1px 1px 3px  black;
     position: fixed;
     top: 0;

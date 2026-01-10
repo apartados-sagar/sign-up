@@ -30,7 +30,7 @@
     .title-header :is(.title-main-page){
         margin: 10px;
         text-align: center;
-        font-size: 14px;
+        font-size: 16px;
     }
     header :is(.nav-header){
         width: 50%;
@@ -118,7 +118,7 @@
     /* pie de pagina */
     body footer{
         justify-content: center;
-
+        width: 100vw;
         align-items: center;
         flex-direction: row;
     }
@@ -132,11 +132,13 @@
     }
     .div-title-contact :is(.h1-title){
         font-size: 18px;
+        text-align: center;
     }
-    .nav-info-contact{
-        height: 50%;
-        background-color: rgba(92, 92, 92,0.5);
-        margin-left: 50px;
+    footer .div-title-contact{
+        margin-left: 15px;
+    }
+    footer .nav-info-contact{
+        margin-left: 10px;
     }
     ul{
         text-decoration: none;
@@ -148,10 +150,7 @@
     }
     .a-gmail{
         color: white;
-    }
-    .a-gmail:hover{
-        cursor: pointer;
-        color: rgb(92, 9, 9);
+        width: 95%;
     }
     li:nth-child(2){
         margin-top: 5px;
