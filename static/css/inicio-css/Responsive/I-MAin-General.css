@@ -20,10 +20,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image: image-set(
-        url("/image/header/header.avif") type("image/avif"),
-        url("/image/header/header.jpg") type("image/jpg")
-    );
+    background-image: url("/image/header/header.jpg");
     box-shadow: 0.5px 0.5px 10px  black;
     position: fixed;
     top: 0;
@@ -259,6 +256,10 @@ header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
 .nav-header .S-buscador .to-search{
     margin-left: 5%;
     width: 70%;
+    font-size: 20px;
+}
+.search{
+    outline:none;
     font-size: 20px;
 }
 /*titulo del pie de pagina*/
