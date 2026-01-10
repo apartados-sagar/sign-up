@@ -20,7 +20,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image: url("/image/header/header.jpg");
+    background-image: url("/image/header/header-2.jpeg");
     box-shadow: 0.5px 0.5px 10px  black;
     position: fixed;
     top: 0;
