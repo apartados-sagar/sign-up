@@ -19,7 +19,7 @@ body{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image: url("/image/header/header-2.jpeg");
+    background: radial-gradient(circle, rgb(90, 9, 9) 0%, rgb(31, 0, 0) 100%);
     box-shadow: 0.5px 0.5px 10px  black;
     position: fixed;
     top: 0;
