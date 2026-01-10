@@ -11,11 +11,6 @@
     .title-header .title-main-page{
         font-size: 26px;
     }
-    header :is(.icon-logo) :is(.logo){
-        width: 150px;
-        height: 150px;
-        margin-left: 30px;
-    }
     /*Texto TRu Perfil moderar el tamaño*/
     .S-A .label-profile{
         font-size: 20px;
