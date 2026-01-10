@@ -9,8 +9,8 @@
         text-align: center;
     }
     /*enlaces de ruta*/
-    .div-center-footer ul{
-        font-size: 10px;
+    .div-center-footer :is(.a-gmail){
+        font-size: 14px;
     }
     .search{
         font-size: 10px;

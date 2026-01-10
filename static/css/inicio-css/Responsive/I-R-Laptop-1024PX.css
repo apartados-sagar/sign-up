@@ -1,4 +1,10 @@
  @media (min-width: 769px) and (max-width: 1024px) {
+    body header{
+        height: 20vh;
+    }
+    body main{
+        margin-top: 20vh;
+    }
     /*titulo de la pagina*/
     .title-main-page{
         font-size: 24px;
@@ -9,7 +15,7 @@
         text-align: center;
     }
     /*enlaces de ruta*/
-    .a-gmail{
+    .div-center-footer .a-gmail{
         font-size: 11px;
     }
     .search{

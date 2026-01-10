@@ -10,9 +10,9 @@
         width: 400px;
         height: 590px;
     }
-    .title-main{
+    .title-header .title-main-page{
         text-align: center;
-        font-size: 50px;
+        font-size: 20px;
     }
     .section:nth-of-type(1) and .section:nth-of-type(2) and .section:nth-of-type(3) and .section:nth-of-type(4){
         display: flex;
@@ -58,7 +58,8 @@
         font-size: 25px;
     }
     .input-chk{
-    width: 25px;
-    height: 25px;
-}
+        width: 25px;
+        height: 25px;
+        
+    }
 }

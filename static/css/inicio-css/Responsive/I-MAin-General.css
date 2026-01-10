@@ -7,27 +7,29 @@
 body{
     margin: 0;
     padding: 0;
-    width: 100vw;
+    width: 100%;
     height: 400vh;
     font-family: Arial, Helvetica, sans-serif;
+    overflow-x: hidden;
 }
 /* toda esta parte sera el encabezado*/
 :where(header){
-    width: 100vw;
+    width: 100%;
     height: 25vh;
     background-color: blue;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-image: -webkit-image-set(
+    background-image: image-set(
         url("/image/header/header.avif") type("image/avif"),
-        url("/image/header/header.jpg") type("image/jpeg")
+        url("/image/header/header.jpg") type("image/jpg")
     );
-    box-shadow: 1px 1px 3px  black;
+    box-shadow: 0.5px 0.5px 10px  black;
     position: fixed;
     top: 0;
     left: 0;
     z-index: 1000; /* Para que quede sobre otros elementos */
+    overflow-x: hidden; 
 }
 .icon-logo{
     width: 100px;
@@ -136,6 +138,7 @@ body{
 .profile-a{
     cursor: pointer;
     color: rgb(56, 0, 102);
+    text-align: center;
 }
 .profile-a:hover{
     color: rgb(92, 9, 9);
@@ -152,20 +155,24 @@ body{
     z-index: -1;
 }
 :where(main){
-    width: 100vw;
+    width: 100%;
     height: 95%;
     margin-top: 25vh;
-    overflow: hidden;
+    overflow-x: hidden;
+}
+.section-title-general{
+    font-size: 30px;
 }
 /* pie de pagina */
 footer{
     background: linear-gradient(rgb(92, 9, 9) 0%, rgb(0, 0, 0)100%);
-    width: 100vw;
+    width: 100%;
     height: 5%;
     color: white;
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow-x: hidden;
 }
 .div-title-contact, .nav-info-contact{
     display: flex;
@@ -189,7 +196,8 @@ ul{
     position: relative;
 }
 .a-gmail{
-    color: white;
+    color: white;   
+    font-size: 22px;
 }
 .a-gmail:hover{
     cursor: pointer;
@@ -203,25 +211,25 @@ ul li{
 }
 
 /*controles de movimiento*/
+.div-area-js{
+    display: flex;
+    justify-content: space-between;
+}
 .div-controles-rigth, .div-controles-left{
-    width: 40px;
-    height: 40px;
+    width: 10px;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 50%;
-    position: relative;
-}
-.div-controles-rigth, .div-controles-left{
-    cursor: pointer;
 }
 .div-controles-rigth{
-    left: 86.5%;
-    top: 43%;
+    margin-right: 10px;
 }
 .div-controles-left{
-    left: 1%;
-    top: 26%;
+    margin-left: 10px;
+}
+.div-controles-rigth:hover, .div-controles-left:hover{
+    cursor: pointer;
 }
 /*Imganes de flechas*/
 .img-arrow{
@@ -230,4 +238,47 @@ ul li{
     padding: 5px;
     opacity: 0.9;
 }
+body Main{
+    position: relative;
+}
 
+body header{
+    height: 20vh;
+}
+body main{
+    margin-top: 20vh;
+}
+header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
+    height: 80%;
+}
+header :is(.icon-logo) :is(.logo){
+    width: 150px;
+    height: 150px;
+    margin-left: 30px;
+}
+/*Texto TRu Perfil moderar el tamaño*/
+.S-A .label-profile{
+    font-size: 20px;
+}
+.div-profile .p-profile-header{
+    font-size: 22px;
+}
+
+/*titulo de la pagina*/
+.title-main-page{
+    font-size: 36px;
+}
+.nav-header .S-buscador .to-search{
+    margin-left: 5%;
+    width: 70%;
+    font-size: 20px;
+}
+.S-buscador .search{
+    outline:none;
+    font-size: 20px;
+}
+/*titulo del pie de pagina*/
+    .h1-title{
+    font-size: 24px;
+    text-align: center;
+}
