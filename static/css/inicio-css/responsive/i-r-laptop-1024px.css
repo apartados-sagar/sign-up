@@ -1,7 +1,7 @@
  @media (min-width: 769px) and (max-width: 1024px) {
     /*titulo de la pagina*/
-    .title-main-page{
-        font-size: 24px;
+    .title-header .title-main-page{
+        font-size: 28px;
     }
     /*titulo del pie de pagina*/
     .h1-title{

@@ -21,4 +21,15 @@
     .footer-div-volver .div-volver-a-inicio {
         font-size: 16px;
     }
+    .header-div-logo, .header-div-principal-titulo, .header-div-perfil-usuario{
+        text-align: center;
+        height: 50%;
+    }
+    header :is(.header-div-principal-titulo){
+        width: 25%;
+    }
+    header .header-div-logo{
+        padding-left: 0;
+        padding-right: 0;
+    }
 }

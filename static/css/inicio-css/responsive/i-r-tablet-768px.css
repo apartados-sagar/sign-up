@@ -1,7 +1,7 @@
 @media (min-width: 426px) and (max-width: 768px) {
     /*titulo de la pagina*/
-    .title-main-page{
-        font-size: 0px;
+    .title-header .title-main-page{
+        font-size: 20px;
     }
     /*titulo del pie de pagina*/
     .h1-title{
@@ -10,10 +10,10 @@
     }
     /*enlaces de ruta*/
     .div-center-footer :is(.a-gmail){
-        font-size: 14px;
+        font-size: 12px;
     }
-    .search{
-        font-size: 10px;
+    .S-buscador .search{
+        font-size: 14px;
     }
     /*texto perfil*/
     .div-profile{
@@ -21,14 +21,18 @@
         justify-content: center;
         align-items: center;
     }
+    .div-profile .label-profile{
+        font-size: 14px;
+    }
     .profile-a{
         padding-left: 5px;
     }
-    .p-profile-header{
+    .div-profile .p-profile-header{
         text-align: center;
+        font-size: 14px;
     }
-    .section-title-general{
-        font-size: 16px;
+    main .section-title-general{
+        font-size: 22px;
     }
     /*camisas difuminado....................................................*/
     :is(.div-camisas) .difuminado:nth-of-type(1){

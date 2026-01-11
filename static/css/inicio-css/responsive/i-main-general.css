@@ -11,6 +11,7 @@ body{
     height: 400vh;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     overflow-x: hidden;
+    background-color: rgb(82, 7, 7);
 }
 h1, h2, h3, h4, h5, h6, p, a{
     margin: 0;
@@ -123,6 +124,7 @@ h1, h2, h3, h4, h5, h6, p, a{
     background-color: rgb(92, 9, 9);
     color: white;
     cursor: pointer;
+    transition: 1s all;
 }
 .to-search:focus{
     outline: none;
@@ -150,6 +152,7 @@ h1, h2, h3, h4, h5, h6, p, a{
 }
 .profile-a:hover{
     color: rgb(92, 9, 9);
+    transition: 1s all;
 }
 /* hasta aqui termina lso estilos del encabezaado*/
 /*Estilos para el area principal v*/
@@ -170,6 +173,7 @@ h1, h2, h3, h4, h5, h6, p, a{
 }
 .section-title-general{
     font-size: 30px;
+    z-index: 10;
 }
 /* pie de pagina */
 footer{
@@ -245,6 +249,7 @@ ul li{
     height: 30px;
     padding: 5px;
     opacity: 0.9;
+    z-index: 10;
 }
 
 body header{

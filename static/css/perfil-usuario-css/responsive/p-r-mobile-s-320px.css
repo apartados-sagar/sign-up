@@ -1,4 +1,4 @@
-@media (min-width: 300px) and (max-width: 320px) {
+@media (min-width: 200px) and (max-width: 320px) {
     /*Estilo del logo sagar*/
     .header-div-logo .div-logo-img-logo {
         width: 50px;
@@ -20,5 +20,16 @@
     /*Estilo del botón volver a inicio*/
     .footer-div-volver .div-volver-a-inicio {
         font-size: 12px;
+    }
+    .header-div-logo, .header-div-principal-titulo, .header-div-perfil-usuario{
+        text-align: center;
+        height: 50%;
+    }
+    header :is(.header-div-principal-titulo){
+        width: 25%;
+    }
+    header .header-div-logo{
+        padding-left: 0;
+        padding-right: 0;
     }
 }

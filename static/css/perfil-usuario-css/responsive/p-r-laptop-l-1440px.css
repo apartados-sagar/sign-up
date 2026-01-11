@@ -1,8 +1,8 @@
 @media (min-width: 1025px) and (max-width: 1440px) {
     /* Tamaño base - sin media query */
     .header-div-logo .div-logo-img-logo {
-        width: 140px;
-        height: 140px;
+        width: 80px;
+        height: 80px;
     }
 
     .header-div-principal-titulo .div-titulo-h1-titulo,

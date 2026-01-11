@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="static/css/inicio-css/div-pantalones.css">
     <link rel="stylesheet" href="static/css/inicio-css/div-joyeria.css">
     <link rel="stylesheet" href="static/css/inicio-css/div-perfumeria.css">
-    
+    <link rel="stylesheet" href="static/css/inicio-css/dialog.css">
 </head>
 <body>
     <header>
@@ -21,7 +21,7 @@
         </div>
         <nav class="nav-header">
             <section class="S-buscador">
-                <input type="text" class="to-search" id="search"><input type="button" class="search" onclick="search()" value="Buscar">
+                <input type="text" class="to-search" id="to-search"><input type="button" class="search" onclick="search()" value="Buscar">
             </section>
             <section class="S-A">
                 <div class="div-profile">
@@ -31,6 +31,20 @@
         </nav>
     </header>
     <main>
+        <dialog id="main-dialog-busqueda">
+            <div class="div-dialog-busqueda">
+                <div class="dialog-div-contenido">
+                    <h1 class="dialog-h1-titulo">busqueda</h1>
+                    <p class="p-dialog-busqueda">se encontrado los siguientes apartados</p>
+                </div>
+                <div id="dialog-div-img">
+
+                </div>
+                <div class="dialog-div-contenido">
+                    <button id="button-dialog-cerrar" onclick="btn_cerrar()">Cerrar</button>
+                </div>
+            </div>
+        </dialog>
         <div class="div-camisas">
             <div class="difuminado"></div>
             <div class="difuminado"></div>
@@ -40,15 +54,15 @@
                     <!-- siglas: c-> producto camisa, h-> hombre, 1 es numero de area -->
                      <h2 class="section-title-general">Estilos de Camisas para Caballeros</h2>
                     <div class="div-area-js" id="c_h">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="C_H_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="C_H_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div> 
                 </section>
                 <section class="S-C-M">
                     <h2 class="section-title-general">Estilos de Camisas para Damas</h2>
                     <div class="div-area-js" id="c_m">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="C_M_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="C_M_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div>
                 </section>
             </div>
@@ -62,15 +76,15 @@
                 <section class="S-P-H">
                     <h2 class="section-title-general">Estilos de Pantalones para Caballeros</h2>
                     <div class="div-area-js" id="p_h">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="P_H_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="P_H_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div>
                 </section>
                 <section class="S-P-M">
                     <h2 class="section-title-general">Estilos de pantalones para Damas</h2>
                     <div class="div-area-js" id="p_m">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="P_M_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="P_M_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div>
                 </section>
             </div>
@@ -84,15 +98,15 @@
                 <section class="S-J-H">
                     <h2 class="section-title-general">Apartados de cadenas para Caballeros</h2>
                     <div class="div-area-js" id="j-h">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="J_H_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="J_H_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div>
                 </section>
                 <section class="S-J-M">
                     <h2 class="section-title-general">Apartados de Joyas para Damas</h2>
                     <div class="div-area-js" id="j_m">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="J_M_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="J_M_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div>
                 </section>
             </div>
@@ -106,15 +120,15 @@
                 <section class="S-PR-H">
                     <h2 class="section-title-general">Apartados de Lociones para Caballeros</h2>
                     <div class="div-area-js" id="pr-h">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="PR_H_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="PR_H_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div>
                 </section>
                 <section class="S-PR-M">
                     <h2 class="section-title-general">Apartados Perfumes para Damas</h2>
                     <div class="div-area-js" id="pr_m">
-                        <div class="div-controles-left"><img src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
-                        <div class="div-controles-rigth"><img src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
+                        <div class="div-controles-left"><img onclick="PR_M_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div class="div-controles-rigth"><img onclick="PR_M_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div>
                 </section>
             </div>
@@ -133,5 +147,7 @@
             </div>
         </nav>
     </footer>
+    <script src="static/js/inicio-js/botton-search-dialog.js"></script>
+    <script src="static/js/inicio-js/btn-arrows-carrusel.js"></script>
 </body>
 </html>

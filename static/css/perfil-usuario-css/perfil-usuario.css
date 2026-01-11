@@ -3,6 +3,7 @@ body{
     padding: 0;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: white;
+    position: relative;
 }
 /*Primera Generacion...................................*/
 header, footer{
@@ -48,6 +49,7 @@ footer{
     padding: 10px;
     border-radius: 10%;
     background-color: rgba(0, 0, 0, 0.5);
+    transition: 2s all;
 }
 .header-div-logo{
     padding-left: 3%;

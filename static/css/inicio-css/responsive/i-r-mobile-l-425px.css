@@ -65,13 +65,18 @@
         width: 70%;
         font-size: 12px;
     }
-    .search{
+    .S-buscador .search{
         outline:none;
+        font-size: 12px;
     }
     /*contenedor de perfil*/
     .div-profile{
         width: 90%;
         height: 20%;
+    }
+    .div-profile .p-profile-header{
+        font-size: 14px;
+        text-align: center;
     }
     /*Texto TRu Perfil moderar el tamaño*/
     .label-profile{
