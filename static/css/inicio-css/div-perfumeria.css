@@ -11,6 +11,7 @@
 /*Todos los div difiminados*/
 .div-perfumeria .difuminado{
     position: absolute;
+    overflow: hidden;
     margin: 0;
     z-index: 0;
 }

@@ -4,6 +4,7 @@
     }
     body main{
         margin-top: 20vh;
+        scrollbar-width: none;
     }
     header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
         height: 80%;
@@ -29,7 +30,6 @@
         font-size: 20px;
     }
     .S-buscador .search{
-        outline:none;
         font-size: 20px;
     }
     /*titulo del pie de pagina*/
