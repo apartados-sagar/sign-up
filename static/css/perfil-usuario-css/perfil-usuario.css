@@ -1,0 +1,128 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: white;
+}
+/*Primera Generacion...................................*/
+header, footer{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+header{
+    width: 100%;
+    height: 15vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    justify-content: space-evenly;
+    background-color: rgb(66, 7, 7);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+main{
+    width: 100%;
+    height: 75vh;
+    margin-top: 15vh;
+    background-color: lightsteelblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+footer{
+    width: 100%;
+    height: 10vh;
+    position: fixed;
+    top: 90vh;
+    left: 0;
+    background-color: rgb(66, 7, 7);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+/*Segunda Generacion...................................*/
+.header-div-logo, .header-div-principal-titulo, .header-div-perfil-usuario{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 80%;
+    padding: 10px;
+    border-radius: 10%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+.header-div-logo{
+    padding-left: 3%;
+    padding-right: 3%;
+}
+/*Tercera Generacion...................................*/
+/*Primera Generacion del header...........*/
+.div-logo-img-logo{
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+}
+.div-titulo-h1-titulo{
+    font-weight: 100;
+}
+
+.div-perfil-h1-usuario{
+    font-weight: 100;
+}
+.div-perfil-h1-cuenta{
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    text-decoration: none;
+    font-size: 30px;
+    color: lightslategrey;
+    background-color: white;
+    border-radius: 5%;
+    font-weight: 700;
+}
+/*primera Generacion del main...........*/
+.div-plantillas-titulo{
+    background-color: rgb(136, 19, 19);
+    width: 100%;
+}
+.main-div-plantillas{
+    width: 95%;
+    height: 90%;
+    background-color: lightslategrey;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    overflow: scroll;
+    scrollbar-width: none;
+}
+/*segunda Generacion del main...........*/
+.plantillas-titulo-h2-titulo{
+    margin-left: 10%;
+    font-weight: 100;
+}
+/*primera Generacion del footer..........*/
+.footer-div-volver{
+    background-color: rgba(0, 0, 0, 0.5);
+    padding: 15px;
+    border-radius: 10px;
+}
+/*segunda Generacion del footer..........*/
+.div-volver-a-inicio{
+    color: white;
+}
+
+/*Estilo del logo sagar*/
+    .header-div-logo .div-logo-img-logo{
+        width: 70px;
+        height: 70px;
+    }
+    /*Los dos Titulos rpincipal y */
+    .header-div-principal-titulo .div-titulo-h1-titulo, .header-div-perfil-usuario .div-perfil-h1-usuario{
+        font-size: 40px;
+    }
+    /*Estilo del h1 cuenta usuario default*/
+    .header-div-perfil-usuario .div-perfil-h1-cuenta{
+        font-size: 35px;
+    }
+    /*Estilo del h2 plantillas guardadas */
+    .div-plantillas-titulo .plantillas-titulo-h2-titulo{
+        font-size: 30px;
+    }
+    /*Estilo del botón volver a inicio */
+    .footer-div-volver .div-volver-a-inicio{
+        font-size: 20px;
+    }

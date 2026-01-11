@@ -1,0 +1,24 @@
+@media (min-width: 321px) and (max-width: 375px) {
+    /*Estilo del logo sagar*/
+    .header-div-logo .div-logo-img-logo {
+        width: 60px;
+        height: 60px;
+    }
+    /*Los dos Titulos principal y usuario*/
+    .header-div-principal-titulo .div-titulo-h1-titulo,
+    .header-div-perfil-usuario .div-perfil-h1-usuario {
+        font-size: 22px;
+    }
+    /*Estilo del h1 cuenta usuario default*/
+    .header-div-perfil-usuario .div-perfil-h1-cuenta {
+        font-size: 18px;
+    }
+    /*Estilo del h2 plantillas guardadas*/
+    .div-plantillas-titulo .plantillas-titulo-h2-titulo {
+        font-size: 20px;
+    }
+    /*Estilo del botón volver a inicio*/
+    .footer-div-volver .div-volver-a-inicio {
+        font-size: 14px;
+    }
+}

@@ -1,0 +1,24 @@
+@media (min-width: 1025px) and (max-width: 1440px) {
+    /* Tamaño base - sin media query */
+    .header-div-logo .div-logo-img-logo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .header-div-principal-titulo .div-titulo-h1-titulo,
+    .header-div-perfil-usuario .div-perfil-h1-usuario {
+        font-size: 50px;
+    }
+
+    .header-div-perfil-usuario .div-perfil-h1-cuenta {
+        font-size: 45px;
+    }
+
+    .div-plantillas-titulo .plantillas-titulo-h2-titulo {
+        font-size: 40px;
+    }
+
+    .footer-div-volver .div-volver-a-inicio {
+        font-size: 28px;
+    }
+}
