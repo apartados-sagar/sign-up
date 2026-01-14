@@ -26,8 +26,8 @@ h1, h2, h3, h4, h5, h6, p, a{
     justify-content: space-between;
     align-items: center;
     background-image: image-set(
-        url("../../../../image/header/header.avif") type("image/avif"),
-        url("../../../../image/header/header.png") type("image/png"));
+        url("../../../image/header/header.avif") type("image/avif"),
+        url("../../../image/header/header.png") type("image/png"));
     box-shadow: 0.5px 0.5px 10px  black;
     position: fixed;
     top: 0;

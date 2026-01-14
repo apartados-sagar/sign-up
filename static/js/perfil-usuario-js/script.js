@@ -1,3 +1,5 @@
-function register(){
+function volver(){
     window.location.href = '/inicio';
 }
+
+

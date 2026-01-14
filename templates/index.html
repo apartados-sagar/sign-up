@@ -1,0 +1,174 @@
+
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>registrarse</title>
+    <link rel="stylesheet" href="static/css/sing-up/s-main-general.css">
+</head>
+<body>
+    <!-- Registro de usuario -->
+    <div class="register">
+        <section class="section">
+            <h1 class="title-main">Crea tu Perfil</h1>
+        </section>
+        <section class="section">
+            <div>
+                <label>Correo electronico</label>
+                <input type="email" id="email" required placeholder="Tu_correo@gmail.com">
+            </div>
+        </section>
+        <section class="section">
+            <div>
+                <label>Número de telefono</label>
+            <input type="tel" id="tel" required placeholder="+504 9999-9999">
+            </div>
+        </section>
+        <section class="section">
+            <div class="boton-siguiente">
+                <button onclick="enviarMagicLink()">Siguiente</button>
+                <div class="div-chk">
+                    <p><input type="checkbox" class="input-chk" id="termino-chk">Revice nuestros <a href="terminos">Términos y Condiciones</a></p>
+                </div>
+            </div>
+        </section>
+    </div>
+    <script src="../static/js/sing-up-js/script.js"></script>
+    <!-- Dentro de tu index.html -->
+<script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, sendSignInLinkToEmail, isSignInWithEmailLink, signInWithEmailLink, setPersistence, browserLocalPersistence } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js"; // <--- IMPORTA ESTO NUEVO
+    import { getFirestore, doc, setDoc } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    const firebaseConfig = {
+        apiKey: "AIzaSyCZ0XEcKUKtbB7WiUAmaIbBf-UkqTgZYxY",
+        authDomain: "apartados-sagar-1a901.firebaseapp.com",
+        projectId: "apartados-sagar-1a901",
+        storageBucket: "apartados-sagar-1a901.firebasestorage.app",
+        messagingSenderId: "145902728046",
+        appId: "1:145902728046:web:4468fb60b5d72cd4efc77f",
+        measurementId: "G-ESJ7EXWH7Z"
+    };
+    
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    const db = getFirestore(app);
+        // --- AGREGA ESTO AQUÍ ---
+    // Esto le dice a Firebase: "Guarda la sesión en el navegador aunque el usuario cierre la pestaña"
+    setPersistence(auth, browserLocalPersistence)
+    .then(() => {
+        console.log("Persistencia activada. El usuario quedará logueado.");
+    })
+    .catch((error) => {
+        console.error("Error al configurar persistencia:", error);
+    });
+
+    // Configuración Magic Link
+    const actionCodeSettings = {
+        // IMPORTANTE: Cambia esto a tu dominio de Vercel cuando subas
+        url: 'https://sign-up-ten-phi.vercel.app//inicio.html', 
+        handleCodeInApp: true 
+    };
+
+    // 2. Función ENVIAR MAGIC LINK (Registro)
+    window.enviarMagicLink = function() {
+        const email = document.getElementById('email').value;
+        // Usamos 'tel' como está en tu HTML original
+        const tel = document.getElementById('tel').value; 
+        const terminos_chk = document.getElementById('termino-chk');
+
+        // Validaciones
+        if (!email) {
+            alert("Por favor escribe tu correo");
+            return;
+        }
+        if (!tel) {
+            alert("Por favor escribe tu telefono");
+            return;
+        }
+        // CORRECCIÓN AQUÍ: Si NO está checked (!checked)
+        if (!terminos_chk.checked) { 
+            alert("Por favor acepte los terminos y condiciones");
+            return;
+        }
+        
+        // Guardamos el teléfono temporalmente para usarlo después del login
+        // Nota: localStorage solo guarda texto, así que guardamos ambos datos por separado o uno solo
+        window.localStorage.setItem('tempEmail', email);
+        window.localStorage.setItem('tempTel', tel);
+
+        // Enviamos el correo
+        sendSignInLinkToEmail(auth, email, actionCodeSettings)
+            .then(() => {
+                alert("¡Enlace enviado! Revisa tu correo. (Si no te cayo Reviza la carpeta de spam)");
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Error al enviar: " + error.message);
+            });
+    } // Cierre correcto de enviarMagicLink
+
+    // 3. Función GUARDAR PERFIL (Después del login)
+    window.guardarPerfil = async function() {
+        const user = auth.currentUser;
+        
+        if (!user) {
+            alert("Debes iniciar sesión primero");
+            return;
+        }
+
+        // Recuperamos el teléfono que guardamos temporalmente antes de pedir el login
+        const telefono = window.localStorage.getItem('tempTel') || document.getElementById('tel').value;
+
+        if (!telefono) {
+            alert("No se encontró el número de teléfono. Intenta registrar de nuevo.");
+            return;
+        }
+
+        try {
+            // Guardar en Firestore
+            await setDoc(doc(db, "usuarios", user.uid), {
+                email: user.email,
+                telefono: telefono,
+                fechaRegistro: new Date()
+            });
+
+            alert("¡Perfil guardado correctamente!");
+            
+            // Limpiamos el localStorage temporal
+            window.localStorage.removeItem('tempEmail');
+            window.localStorage.removeItem('tempTel');
+
+            // Redirigir
+            window.location.href = '/inicio.html'; // Asegúrate de tener esta página o cámbiala a la que quieras
+        } catch (error) {
+            console.error(error);
+            alert("Error al guardar: " + error.message);
+        }
+    } // Cierre correcto de guardarPerfil
+
+    // 4. Lógica al cargar la página (Detectar si viene del enlace del correo)
+    // Esto se ejecuta automáticamente cada vez que carga la página
+    if (isSignInWithEmailLink(auth, window.location.href)) {
+        let email = window.localStorage.getItem('tempEmail'); // Usamos la misma clave que guardamos
+        
+        if (!email) {
+            email = window.prompt('Por favor proporciona tu correo para confirmar:');
+        }
+
+        signInWithEmailLink(auth, email, window.location.href)
+            .then((result) => {
+                // Login exitoso
+                console.log("Usuario logueado:", result.user);
+                // No limpiamos tempTel todavía, lo necesitamos para guardarPerfil
+                guardarPerfil();
+            })
+            .catch((error) => {
+                console.error(error);
+                alert("Error al iniciar sesión: " + error.message);
+            });
+    }
+</script>
+</body>
+</html>
