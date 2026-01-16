@@ -196,10 +196,10 @@
     let esAdmin = false;
 
     // Verificar usuario al cargar
-    onAuthStateChanged(auth, (user) => {
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
         console.log('Estado de auth:', user);
         if (user) {
-            // Verificar si es admin
+            // Verificar si es admin  
             esAdmin = ADMINS.includes(user.email);
             
             if (esAdmin) {
@@ -210,10 +210,10 @@
                     console.log('Error al abrir modal:', error)
                 }
             }
-        } else {
+        }
+        else{
             window.location.href = '/inicio.html';
         }
-        return;
     });
 </script>
 </body>
