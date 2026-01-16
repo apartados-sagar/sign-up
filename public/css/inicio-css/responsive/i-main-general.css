@@ -280,3 +280,23 @@ header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
     font-size: 24px;
     text-align: center;
 }
+
+
+
+
+
+#panel-admin{
+    width: 80%;
+    height: 30%;
+    position: fixed;
+    background-color: rgba(179, 179, 179, 0.445);
+    margin-top: 30px;
+    margin-left: 10%;
+    box-shadow: 3 1px 3 1px black;
+    border-radius: 20px;
+}
+.div-center-dialog{
+    margin-top: 15px;
+    margin-left: 20px;
+    font-weight: 500;   
+}

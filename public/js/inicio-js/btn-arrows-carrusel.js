@@ -1,6 +1,33 @@
 /* Area de Camisas............................*/
 /* flechas hombres...................*/
 /* c_h camisas hombres ....*/
+let currentIndex = 0;
+const track = document.getElementById('slider-track');
+const plantillas = document.querySelectorAll('.plantilla');
+const totalPlantillas = plantillas.length;
+
+function P_H_arrow_right() {
+    if (currentIndex < totalPlantillas - 1) {
+        currentIndex++;
+    } else {
+        currentIndex = 0; // Volver al inicio
+    }
+    actualizarSlider();
+}
+
+function P_H_arrow_left() {
+    if (currentIndex > 0) {
+        currentIndex--;
+    } else {
+        currentIndex = totalPlantillas - 1; // Ir al final
+    }
+    actualizarSlider()
+}
+function actualizarSlider() {
+    const desplazamiento = -currentIndex * 100;
+    track.style.transform = `translateX(${desplazamiento}%)`;
+}
+
 function C_H_arrow_left(){
      
 }

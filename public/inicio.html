@@ -31,6 +31,29 @@
         </nav>
     </header>
     <main>
+        <divalog id="panel-admin" style="display: none;">
+            <div class="div-center-dialog">
+                <!-- siglas: c-> producto camisa, h-> hombre, 1 es numero de area -->
+                <Label>ingrese el Area</Label>
+                <select id="select_area" class="select_area">
+                    <option value="c_">camisas</option>
+                    <option value="p_">pantalones</option>
+                    <option value="j_">joyeria</option>
+                    <option value="pr_">perfumeria</option>
+                </select><br>
+                <Label>ingrese el genero</Label><br>
+                <select id="select_genero" class="select_genero">
+                    <option value="h">hombre</option>
+                    <option value="m">mujer</option>
+                </select><br>
+                <Label>ingrese la imagen</Label><br>
+                <input type="file" name="file" id="file_image"><br>
+                <Label>ingrese la descripcion</Label><br>
+                <input type="text" name="text" id="text_descripcion">
+                <input type="button" onclick="btn_cerrar_modal()">
+                <input type="button" onclick="btn_enviar_plantilla()">
+            </div>
+        </divalog>
         <dialog id="main-dialog-busqueda">
             <div class="div-dialog-busqueda">
                 <div class="dialog-div-contenido">
@@ -149,32 +172,48 @@
     </footer>
     <script src="js/inicio-js/botton-search-dialog.js"></script>
     <script src="js/inicio-js/btn-arrows-carrusel.js"></script>
-    <script src="js/inicio-js/script.js">
-        // 3. Lógica para cuando el usuario abre el enlace desde el correo
-        // Esto debe ejecutarse en la página de inicio.html o en index.html
-        // Te recomiendo poner este código también en inicio.html por seguridad.
-        if (isSignInWithEmailLink(auth, window.location.href)) {
-            let email = window.localStorage.getItem('emailForSignIn');
-            
-            // Si por alguna razón el navegador borró la variable, le pedimos el correo
-            if (!email) {
-                email = window.prompt('Por favor proporciona tu correo para confirmar:');
-            }
+    
+    <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
-            // Completar el inicio de sesión
-            signInWithEmailLink(auth, email, window.location.href)
-                .then((result) => {
-                    // Usuario logueado con éxito
-                    window.localStorage.removeItem('emailForSignIn');
-                    alert("¡Sesión iniciada correctamente!");
-                    // Ya estás en inicio.html, no necesitas redirigir, o puedes hacer:
-                    // window.location.replace('/dashboard.html'); 
-                })
-                .catch((error) => {
-                    console.error(error);
-                    alert("Error al iniciar sesión: " + error.message);
-                });
+    const firebaseConfig = {
+        apiKey: "AIzaSyCZ0XEcKUKtbB7WiUAmaIbBf-UkqTgZYxY",
+        authDomain: "apartados-sagar-1a901.firebaseapp.com",
+        projectId: "apartados-sagar-1a901",
+        storageBucket: "apartados-sagar-1a901.firebasestorage.app",
+        messagingSenderId: "145902728046",
+        appId: "1:145902728046:web:4468fb60b5d72cd4efc77f",
+        measurementId: "G-ESJ7EXWH7Z"
+    };
+    const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+
+    
+    const ADMINS = ['admin@apartadossagar.com'];
+
+    // Variable global para saber si es admin
+    let esAdmin = false;
+
+    // Verificar usuario al cargar
+    onAuthStateChanged(auth, (user) => {
+        console.log('Estado de auth:', user);
+        if (user) {
+            // Verificar si es admin
+            esAdmin = ADMINS.includes(user.email);
+            
+            if (esAdmin) {
+                try {
+                    const panel_control = document.getElementById('panel-admin').style.display = 'block';
+                    
+                } catch (error) {
+                    console.log('Error al abrir modal:', error)
+                }
+            }
+        } else {
+            window.location.href = '/index.html';
         }
-    </script>
+    });
+</script>
 </body>
 </html>
