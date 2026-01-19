@@ -48,7 +48,6 @@ class handler(BaseHTTPRequestHandler):
             # GUARDAR USUARIO
             if accion == 'guardar_usuario':
                 resultado = supabase.table('usuarios').insert({
-                    'id': datos.get('uid'),
                     'nombre': datos.get('email'),
                     'telefono': datos.get('telefono')
                 }).execute()

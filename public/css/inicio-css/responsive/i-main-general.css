@@ -289,7 +289,7 @@ header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
     width: 80%;
     height: 30%;
     position: fixed;
-    background-color: rgba(179, 179, 179, 0.445);
+    background-color: rgba(179, 179, 179, 0.726);
     margin-top: 30px;
     margin-left: 10%;
     box-shadow: 3 1px 3 1px black;
@@ -299,4 +299,10 @@ header :is(.icon-logo), header :is(.title-header), header :is(.nav-header){
     margin-top: 15px;
     margin-left: 20px;
     font-weight: 500;   
+    
+}
+.div-derecho{
+    position: relative;
+    left: 50%;
+    bottom: 70%;
 }

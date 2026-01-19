@@ -47,11 +47,15 @@
                     <option value="m">mujer</option>
                 </select><br>
                 <Label>ingrese la imagen</Label><br>
-                <input type="file" name="file" id="file_image"><br>
+                <input type="file" name="file" id="file_image" accept="image/*"><br>
                 <Label>ingrese la descripcion</Label><br>
                 <input type="text" name="text" id="text_descripcion">
-                <input type="button" onclick="btn_cerrar_modal()">
-                <input type="button" onclick="btn_enviar_plantilla()">
+                
+            </div>
+            <div class="div-derecho">
+                <h1>Operaciones</h1>
+                <input type="button" id="btn_cerrar" value="Cerrar">
+                <input type="button" id="btnSubir" value="Registrar">
             </div>
         </divalog>
         <dialog id="main-dialog-busqueda">
@@ -78,6 +82,7 @@
                      <h2 class="section-title-general">Estilos de Camisas para Caballeros</h2>
                     <div class="div-area-js" id="c_h">
                         <div class="div-controles-left"><img onclick="C_H_arrow_left()" src="image/flechas/arrow_left.png" alt="Siguiente" class="img-arrow"></div>
+                        <div id="div_c_h"></div>
                         <div class="div-controles-rigth"><img onclick="C_H_arrow_right()" src="image/flechas/arrow_right.png" alt="Atras" class="img-arrow"></div>
                     </div> 
                 </section>
@@ -170,51 +175,10 @@
             </div>
         </nav>
     </footer>
-    <script src="js/inicio-js/botton-search-dialog.js"></script>
-    <script src="js/inicio-js/btn-arrows-carrusel.js"></script>
+    <script type="module" src="js/variables.js"></script>
+    <script src="js/inicio-js/solicitudes_user/botton-search-dialog.js"></script>
+    <script src="js/inicio-js/solicitudes_user/btn-arrows-carrusel.js"></script>
+    <script type="module" src="js/inicio-js/Solicitudes_admin/Subir_plantilla.js"></script>
     
-    <script type="module">
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-
-    const firebaseConfig = {
-        apiKey: "AIzaSyCZ0XEcKUKtbB7WiUAmaIbBf-UkqTgZYxY",
-        authDomain: "apartados-sagar-1a901.firebaseapp.com",
-        projectId: "apartados-sagar-1a901",
-        storageBucket: "apartados-sagar-1a901.firebasestorage.app",
-        messagingSenderId: "145902728046",
-        appId: "1:145902728046:web:4468fb60b5d72cd4efc77f",
-        measurementId: "G-ESJ7EXWH7Z"
-    };
-    const app = initializeApp(firebaseConfig);
-    const auth = getAuth(app);
-
-    
-    const ADMINS = ['admin@apartadossagar.com'];
-
-    // Variable global para saber si es admin
-    let esAdmin = false;
-
-    // Verificar usuario al cargar
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-        console.log('Estado de auth:', user);
-        if (user) {
-            // Verificar si es admin  
-            esAdmin = ADMINS.includes(user.email);
-            
-            if (esAdmin) {
-                try {
-                    const panel_control = document.getElementById('panel-admin').style.display = 'block';
-                    
-                } catch (error) {
-                    console.log('Error al abrir modal:', error)
-                }
-            }
-        }
-        else{
-            window.location.href = '/inicio.html';
-        }
-    });
-</script>
 </body>
 </html>
