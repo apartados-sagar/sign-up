@@ -4,12 +4,10 @@ import os
 from supabase import create_client
 import cgi
 
+SUPABASE_URL = os.environ["SUPABASE_URL"]
+SUPABASE_KEY = os.environ["SUPABASE_KEY"]
 
-# Conectar con Supabase
-supabase = create_client(
-    os.environ.get('SUPABASE_URL'),
-    os.environ.get('SUPABASE_KEY')
-)
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
 BUCKET_CAMISAS = 'camisas'
 BUCKET_PANTALONES = 'pantalones'
