@@ -78,7 +78,6 @@ class handler(BaseHTTPRequestHandler):
 
             # --- DEBUG START ---
             print(f"BACKEND DEBUG: select_area recibido: {select_area}")
-            print(f"BACKEND DEBUG: select_genero recibido: {select_genero}")
             print(f"BACKEND DEBUG: url_image recibida del frontend (en backend): {url_image}")
             # --- DEBUG END ---
 
