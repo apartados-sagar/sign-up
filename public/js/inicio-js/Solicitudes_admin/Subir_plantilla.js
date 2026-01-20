@@ -46,18 +46,24 @@ async function subirPlantilla() {
             return;
         }
         
-        const url_image = create_url(select_area, select_genero, nombre); // Genera la ruta relativa al bucket
+        const url_image = create_url(select_genero, nombre); // Genera la ruta relativa al bucket
 
         const formData = new FormData();
-
+        
         formData.append("accion", "insertar_plantilla");
         formData.append("select_area", select_area);
-        formData.append("select_genero", select_genero);
         formData.append("url_image", url_image);
         formData.append("text_descripcion", text_descripcion);
         formData.append("contraseña", password_base);
         formData.append("imagen", file_image);
-
+        
+        // --- DEBUG START ---
+        console.log("FRONTEND DEBUG: select_area:", select_area);
+        console.log("FRONTEND DEBUG: select_genero:", select_genero);
+        console.log("FRONTEND DEBUG: nombre del archivo:", nombre);
+        console.log("FRONTEND DEBUG: url_image generada por create_url:", url_image);
+        // --- DEBUG END ---
+        
         const response = await fetch('/api/subir_plantillas',{
             method: 'POST',
             body: formData

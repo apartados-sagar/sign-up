@@ -60,16 +60,6 @@ class handler(BaseHTTPRequestHandler):
             case _:
                 return None
     
-    # buscar el genero
-    def buscar_genero(self, select_genero):
-        match select_genero:
-            case 'h':
-                return GENERO_HOMBRES
-            case 'm':
-                return GENERO_MUJERES
-            case _:
-                return None
-    
     def do_POST(self):
         """Cuando el navegador envía datos (POST)"""
         try:
@@ -83,11 +73,16 @@ class handler(BaseHTTPRequestHandler):
             accion = form.getvalue("accion")
             password = form.getvalue("contraseña")
             select_area = form.getvalue("select_area")
-            select_genero = form.getvalue("select_genero")
             url_image = form.getvalue("url_image")
             descripcion = form.getvalue("text_descripcion")
 
-            if not all([accion, password, select_area, select_genero, url_image, descripcion]):
+            # --- DEBUG START ---
+            print(f"BACKEND DEBUG: select_area recibido: {select_area}")
+            print(f"BACKEND DEBUG: select_genero recibido: {select_genero}")
+            print(f"BACKEND DEBUG: url_image recibida del frontend (en backend): {url_image}")
+            # --- DEBUG END ---
+
+            if not all([accion, password, select_area, url_image, descripcion]):
                 self.responder({'error': 'Faltan campos requeridos'}, codigo=400)
                 return
 
@@ -141,12 +136,6 @@ class handler(BaseHTTPRequestHandler):
                 self.responder({'error': 'Área no válida'}, codigo=400)
                 return
 
-            # Obtener el género
-            genero_path = self.buscar_genero(select_genero)
-            if not genero_path:
-                self.responder({'error': 'Género no válido'}, codigo=400)
-                return
-
             # Accion insertar la plantilla la base de datos
             if accion == 'insertar_plantilla':
                 
@@ -155,7 +144,6 @@ class handler(BaseHTTPRequestHandler):
                 plantilla = supabase.table('imagenes').insert({
                     'select_area': select_area,
                     'cubo': bucket_name,
-                    'select_genero': select_genero,
                     'descripcion': descripcion,
                     'url_image': url_image
                 }).execute()
@@ -171,7 +159,6 @@ class handler(BaseHTTPRequestHandler):
 
                 # Subir la imagen al almacenamiento de Supabase
                 try:
-                    # La url_image del frontend ya es la ruta relativa dentro del bucket (ej: hombres/header.png)
                     upload_response = supabase.storage.from_(bucket_name).upload(
                         url_image,
                         file_data,
@@ -186,6 +173,7 @@ class handler(BaseHTTPRequestHandler):
                             print(f"Error al revertir registro de BD: {delete_error}")
                     self.responder({'error': f'Error al subir imagen: {str(upload_error)}'}, codigo=500)
                     return
+
 
                 # Obtener la URL pública de la imagen
                 imagen_url_publica = None
