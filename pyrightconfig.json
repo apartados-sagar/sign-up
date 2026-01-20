@@ -1,0 +1,17 @@
+{
+  "venvPath": ".",
+  "venv": ".",
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "basic",
+  "reportMissingImports": true,
+  "reportMissingTypeStubs": false,
+  "executionEnvironments": [
+    {
+      "root": ".",
+      "pythonVersion": "3.11",
+      "extraPaths": [
+        "C:\\Users\\adali\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "python.defaultInterpreterPath": "python",
+  "python.analysis.extraPaths": [
+    "C:\\Users\\adali\\AppData\\Local\\Programs\\Python\\Python311\\Lib\\site-packages"
+  ],
+  "python.analysis.autoImportCompletions": true,
+  "python.analysis.typeCheckingMode": "basic",
+  "python.languageServer": "Pylance",
+  "python.analysis.diagnosticMode": "workspace"
+}

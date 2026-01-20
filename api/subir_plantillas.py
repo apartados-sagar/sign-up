@@ -3,9 +3,13 @@ import json
 import os
 from supabase import create_client
 import cgi
+from typing import cast, IO, Any
 
-SUPABASE_URL = os.environ["SUPABASE_URL"]
-SUPABASE_KEY = os.environ["SUPABASE_KEY"]
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError("SUPABASE_URL y SUPABASE_KEY deben estar configurados")
 
 supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 
@@ -16,9 +20,6 @@ BUCKET_PERFUMERIA = 'perfumeria'
 
 GENERO_HOMBRES = 'hombres/'
 GENERO_MUJERES = 'mujeres/'
-
-BUCKET_NAME = ''
-FILE_PATH = ''
 
 class handler(BaseHTTPRequestHandler):
     
@@ -44,123 +45,182 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Headers', 'Content-Type')
         self.end_headers()
 
-    # En el storeg de supabase es cubo/genero/nombrede imagen producto
+    # En el storage de supabase es cubo/genero/nombrede imagen producto
     # buscar el cubo o area
-    def buscar_cubo(select_area):
+    def buscar_cubo(self, select_area):
         match select_area:
             case 'c_':
-                # Nombre de cubo camisas
-                BUCKET_NAME = BUCKET_CAMISAS
-                return BUCKET_NAME 
+                return BUCKET_CAMISAS
             case 'p_':
-                # Nombre de cubo pantalones
-                BUCKET_NAME = BUCKET_PANTALONES
-                return BUCKET_NAME 
+                return BUCKET_PANTALONES
             case 'j_':
-                # Nombre de cubo joyeria
-                BUCKET_NAME = BUCKET_JOYERIA
-                return BUCKET_NAME
+                return BUCKET_JOYERIA
             case 'pr_':
-                # Nombre de cubo perfumeria
-                BUCKET_NAME = BUCKET_PERFUMERIA
-                return BUCKET_NAME
+                return BUCKET_PERFUMERIA
             case _:
-                return "Opción no válida"
+                return None
+    
     # buscar el genero
-    def buscar_genero(select_genero):
+    def buscar_genero(self, select_genero):
         match select_genero:
             case 'h':
-                FILE_PATH = BUCKET_CAMISAS
-                return FILE_PATH
+                return GENERO_HOMBRES
             case 'm':
-                FILE_PATH = BUCKET_PANTALONES
-                return FILE_PATH
+                return GENERO_MUJERES
             case _:
-                return "Opción no válida"
+                return None
     
     def do_POST(self):
         """Cuando el navegador envía datos (POST)"""
         try:
             form = cgi.FieldStorage(
-                fp=self.rfile,
+                fp=cast(IO[Any], self.rfile),
                 headers=self.headers,
                 environ={'REQUEST_METHOD': 'POST'}
             )
 
-            validar = form.getvalue("accion")
+            # Validar que todos los campos requeridos estén presentes
+            accion = form.getvalue("accion")
             password = form.getvalue("contraseña")
             select_area = form.getvalue("select_area")
             select_genero = form.getvalue("select_genero")
             url_image = form.getvalue("url_image")
             descripcion = form.getvalue("text_descripcion")
-            imagen = form.getvalue("imagen")
 
-
-            # Autorizar el administrador
-            response = supabase.auth.sign_in_with_password({
-                "email": "admin@apartadossagar.com",
-                "password": password
-            })
-            # verificar el administrador
-            if response:
-                # Ver qué acción quiere hacer
-                accion = validar
-            else:
-                self.responder({'error': 'No esta autorizado'}, codigo=500)
+            if not all([accion, password, select_area, select_genero, url_image, descripcion]):
+                self.responder({'error': 'Faltan campos requeridos'}, codigo=400)
                 return
 
-            # Obtener el id de las imagenes 
-            id_imagenes = supabase.table('imagenes').select(
-                'id_camisas'
-            ).execute()
+            # Obtener el archivo de imagen
+            if 'imagen' not in form:
+                self.responder({'error': 'No se proporcionó archivo de imagen'}, codigo=400)
+                return
             
-            ultimo_id = id_imagenes.data[-1]['id_camisas'] 
-            if ultimo_id == 0:
-                nuevo_id = ultimo_id + 1
+            imagen_file = form['imagen']
+            if not imagen_file.filename:
+                self.responder({'error': 'Archivo de imagen inválido'}, codigo=400)
+                return
+
+            # Validar tipo de archivo
+            filename = imagen_file.filename.lower()
+            if not (filename.endswith('.jpg') or filename.endswith('.jpeg') or 
+                    filename.endswith('.png') or filename.endswith('.webp')):
+                self.responder({'error': 'Tipo de archivo no permitido. Use JPG, PNG o WEBP'}, codigo=400)
+                return
+
+            # Leer el contenido del archivo
+            file_data = imagen_file.file.read()
+            if len(file_data) == 0:
+                self.responder({'error': 'El archivo está vacío'}, codigo=400)
+                return
+
+            # Determinar content-type basado en la extensión
+            if filename.endswith('.png'):
+                content_type = 'image/png'
+            elif filename.endswith('.webp'):
+                content_type = 'image/webp'
             else:
-                nuevo_id = 1
+                content_type = 'image/jpeg'
+
+            # Autorizar el administrador
+            try:
+                response = supabase.auth.sign_in_with_password({
+                    "email": "admin@apartadossagar.com",
+                    "password": password
+                })
+                if not response or not response.user:
+                    self.responder({'error': 'No está autorizado'}, codigo=401)
+                    return
+            except Exception as auth_error:
+                self.responder({'error': 'Error de autenticación'}, codigo=401)
+                return
 
             # Obtener el cubo preciso
-            BUCKET_NAME = self.buscar_cubo(select_area)
+            bucket_name = self.buscar_cubo(select_area)
+            if not bucket_name:
+                self.responder({'error': 'Área no válida'}, codigo=400)
+                return
+
+            # Obtener el género
+            genero_path = self.buscar_genero(select_genero)
+            if not genero_path:
+                self.responder({'error': 'Género no válido'}, codigo=400)
+                return
 
             # Accion insertar la plantilla la base de datos
             if accion == 'insertar_plantilla':
+                # Obtener el último ID de las imágenes
+                try:
+                    id_imagenes = supabase.table('imagenes').select('id_camisas').order('id_camisas', desc=True).limit(1).execute()
+                    
+                    if id_imagenes.data and len(id_imagenes.data) > 0:
+                        ultimo_id = id_imagenes.data[0].get('id_camisas', 0)
+                        nuevo_id = ultimo_id + 1 if ultimo_id > 0 else 1
+                    else:
+                        nuevo_id = 1
+                except Exception as id_error:
+                    # Si hay error al obtener ID, empezar desde 1
+                    nuevo_id = 1
+
+                # Insertar registro en la base de datos
                 plantilla = supabase.table('imagenes').insert({
                     'id_camisas': nuevo_id,
                     'select_area': select_area,
-                    'cubo': BUCKET_NAME,
-                    'select_genero': select_genero, # url_image y las demas son nombres de las tablas
+                    'cubo': bucket_name,
+                    'select_genero': select_genero,
                     'descripcion': descripcion,
                     'url_image': url_image
                 }).execute()
 
-                ruta_image = supabase.table('imagenes').select({
-                    'url_image'
-                }).execute()
+                if not plantilla.data or len(plantilla.data) == 0:
+                    self.responder({'error': 'Error al insertar en la base de datos'}, codigo=500)
+                    return
 
-                descripcion_enviar = supabase.table('imagenes').select({
-                    'url_image'
-                }).execute()
+                # Subir la imagen al almacenamiento de Supabase
+                try:
+                    upload_response = supabase.storage.from_(bucket_name).upload(
+                        url_image,
+                        file_data,
+                        {"content-type": content_type, "upsert": "true"}
+                    )
+                except Exception as upload_error:
+                    # Si falla el upload, intentar eliminar el registro de la BD
+                    try:
+                        supabase.table('imagenes').delete().eq('id_camisas', nuevo_id).execute()
+                    except:
+                        pass
+                    self.responder({'error': f'Error al subir imagen: {str(upload_error)}'}, codigo=500)
+                    return
 
-                file_data = imagen.file.read()
+                # Obtener la URL pública de la imagen
+                try:
+                    public_url_response = supabase.storage.from_(bucket_name).get_public_url(url_image)
+                    # get_public_url puede retornar un string directamente o un objeto con la propiedad 'publicUrl'
+                    if isinstance(public_url_response, str):
+                        imagen_url_publica = public_url_response
+                    elif hasattr(public_url_response, 'publicUrl'):
+                        imagen_url_publica = public_url_response.publicUrl
+                    else:
+                        # Construir URL manualmente si el formato no es el esperado
+                        imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
+                except Exception:
+                    # Si no se puede obtener URL pública, construirla manualmente
+                    imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
 
-                # insertar la imagen al almacenamiento de archivos de supabase
-                res = supabase.storage.from_(BUCKET_NAME).upload(
-                    ruta_image,
-                    file_data,
-                    {"content-type": "image/"}  # Cambia según el tipo de imagen
-                )
-
-                # obtener la imagen 
-                imagen = supabase.storage.from_(BUCKET_NAME).download(url_image) 
-
-                self.responder({'exito': True,'descripcion': descripcion_enviar, 'imagen': imagen, 'se subio?:': res, 'registro_base': plantilla}) # luego lo quito
+                # Responder con datos serializables
+                self.responder({
+                    'exito': True,
+                    'descripcion': descripcion,
+                    'imagen_url': imagen_url_publica,
+                    'id_registro': nuevo_id,
+                    'url_image': url_image
+                })
             else:
-                self.responder({'error': 'accion co comprendida'}, codigo=500)
+                self.responder({'error': 'Acción no comprendida'}, codigo=400)
 
         except Exception as error:
             # Si algo salió mal
-            self.responder({'error': str(error)}, codigo=500)
+            self.responder({'error': f'Error del servidor: {str(error)}'}, codigo=500)
     
     def do_GET(self):
         """Cuando el navegador solo pide información (GET)"""
