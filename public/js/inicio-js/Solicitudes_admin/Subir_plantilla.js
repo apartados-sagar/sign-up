@@ -46,14 +46,13 @@ async function subirPlantilla() {
             return;
         }
         
-        const url_image = create_url(select_area, select_genero, nombre); // hay otro archivo que me busca la url un switch
+        const url_image = create_url(select_area, select_genero, nombre); // Genera la ruta relativa al bucket
 
         const formData = new FormData();
 
         formData.append("accion", "insertar_plantilla");
         formData.append("select_area", select_area);
         formData.append("select_genero", select_genero);
-        formData.append("nombre", nombre);
         formData.append("url_image", url_image);
         formData.append("text_descripcion", text_descripcion);
         formData.append("contraseña", password_base);
@@ -76,8 +75,8 @@ async function subirPlantilla() {
         // 3. Usar los datos que te devolvió el backend
         console.log("Respuesta del backend:", data);
 
-        const imagenURL = data.imagen;        // lo que mandaste desde Python
-        const descripcion = data.descripcion; // lo que mandaste desde Python
+        const imagenURL = data.imagen_url;       // URL pública de la imagen del backend
+        const descripcion = data.descripcion; // Descripción del backend
 
         // 4. Mostrar la imagen y descripción en tu HTML
         const div_camisas_hombre = document.getElementById('div_c_h');

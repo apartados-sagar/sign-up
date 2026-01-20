@@ -149,22 +149,10 @@ class handler(BaseHTTPRequestHandler):
 
             # Accion insertar la plantilla la base de datos
             if accion == 'insertar_plantilla':
-                # Obtener el último ID de las imágenes
-                try:
-                    id_imagenes = supabase.table('imagenes').select('id_camisas').order('id_camisas', desc=True).limit(1).execute()
-                    
-                    if id_imagenes.data and len(id_imagenes.data) > 0:
-                        ultimo_id = id_imagenes.data[0].get('id_camisas', 0)
-                        nuevo_id = ultimo_id + 1 if ultimo_id > 0 else 1
-                    else:
-                        nuevo_id = 1
-                except Exception as id_error:
-                    # Si hay error al obtener ID, empezar desde 1
-                    nuevo_id = 1
-
+                
                 # Insertar registro en la base de datos
+                # id_camisas es auto-incrementable, no lo insertamos manualmente
                 plantilla = supabase.table('imagenes').insert({
-                    'id_camisas': nuevo_id,
                     'select_area': select_area,
                     'cubo': bucket_name,
                     'select_genero': select_genero,
@@ -176,8 +164,14 @@ class handler(BaseHTTPRequestHandler):
                     self.responder({'error': 'Error al insertar en la base de datos'}, codigo=500)
                     return
 
+                # Obtener el ID del registro recién insertado para el rollback
+                # Asumiendo que el ID auto-incrementable se devuelve en plantilla.data
+                # Si no, deberías obtenerlo de otra manera o reconsiderar cómo manejas los IDs
+                inserted_id = plantilla.data[0]['id'] if 'id' in plantilla.data[0] else None
+
                 # Subir la imagen al almacenamiento de Supabase
                 try:
+                    # La url_image del frontend ya es la ruta relativa dentro del bucket (ej: hombres/header.png)
                     upload_response = supabase.storage.from_(bucket_name).upload(
                         url_image,
                         file_data,
@@ -185,26 +179,26 @@ class handler(BaseHTTPRequestHandler):
                     )
                 except Exception as upload_error:
                     # Si falla el upload, intentar eliminar el registro de la BD
-                    try:
-                        supabase.table('imagenes').delete().eq('id_camisas', nuevo_id).execute()
-                    except:
-                        pass
+                    if inserted_id:
+                        try:
+                            supabase.table('imagenes').delete().eq('id', inserted_id).execute()
+                        except Exception as delete_error:
+                            print(f"Error al revertir registro de BD: {delete_error}")
                     self.responder({'error': f'Error al subir imagen: {str(upload_error)}'}, codigo=500)
                     return
 
                 # Obtener la URL pública de la imagen
+                imagen_url_publica = None
                 try:
+                    # get_public_url devuelve la URL pública directamente
                     public_url_response = supabase.storage.from_(bucket_name).get_public_url(url_image)
-                    # get_public_url puede retornar un string directamente o un objeto con la propiedad 'publicUrl'
-                    if isinstance(public_url_response, str):
+                    if public_url_response:
                         imagen_url_publica = public_url_response
-                    elif hasattr(public_url_response, 'publicUrl'):
-                        imagen_url_publica = public_url_response.publicUrl
                     else:
                         # Construir URL manualmente si el formato no es el esperado
                         imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
-                except Exception:
-                    # Si no se puede obtener URL pública, construirla manualmente
+                except Exception as url_error:
+                    print(f"Error al obtener URL pública: {url_error}")
                     imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
 
                 # Responder con datos serializables
@@ -212,11 +206,8 @@ class handler(BaseHTTPRequestHandler):
                     'exito': True,
                     'descripcion': descripcion,
                     'imagen_url': imagen_url_publica,
-                    'id_registro': nuevo_id,
-                    'url_image': url_image
+                    'url_image_path_in_bucket': url_image # Para referencia en el frontend
                 })
-            else:
-                self.responder({'error': 'Acción no comprendida'}, codigo=400)
 
         except Exception as error:
             # Si algo salió mal

@@ -17,7 +17,7 @@ export function create_url(select_area, select_genero, nombre){
             area = "perfumeria/";
             break;
         default:
-            area = "area invalidad"; 
+            area = "area invalida"; 
             return "error area";
     }
 
