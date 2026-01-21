@@ -217,6 +217,7 @@ class handler(BaseHTTPRequestHandler):
         except Exception as error:
             # Si algo salió mal
             self.responder({'error': f'Error del servidor: {str(error)}'}, codigo=500)
+            print(f"BACKEND: error recibido: {error}")
     
     def do_GET(self):
         """Cuando el navegador solo pide información (GET)"""
