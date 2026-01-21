@@ -135,6 +135,13 @@ class handler(BaseHTTPRequestHandler):
                 self.responder({'error': 'Área no válida'}, codigo=400)
                 return
 
+
+            # Carpeta local donde se guardará la imagen
+            local_folder = "/public/image/"  # Cambia según tu configuración
+            os.makedirs(local_folder, exist_ok=True)  # Crear carpeta si no existe
+            local_path = os.path.join(local_folder, filename)
+            
+
             # Accion insertar la plantilla la base de datos
             if accion == 'insertar_plantilla':
                 
@@ -154,7 +161,7 @@ class handler(BaseHTTPRequestHandler):
                 # Obtener el ID del registro recién insertado para el rollback
                 # Asumiendo que el ID auto-incrementable se devuelve en plantilla.data
                 # Si no, deberías obtenerlo de otra manera o reconsiderar cómo manejas los IDs
-                inserted_id = plantilla.data[0]['id'] if 'id' in plantilla.data[0] else None
+                inserted_id = plantilla.data[0]['id_camisas'] if 'id_camisas    ' in plantilla.data[0] else None
 
                 # Subir la imagen al almacenamiento de Supabase
                 try:
@@ -178,12 +185,22 @@ class handler(BaseHTTPRequestHandler):
                 imagen_url_publica = None
                 try:
                     # get_public_url devuelve la URL pública directamente
-                    public_url_response = supabase.storage.from_(bucket_name).get_public_url(url_image)
+                    public_url_response = supabase.storage.from_(bucket_name).douwload(url_image)
+                    
+                    print(f"BACKEND: imagen recibido: {public_url_response}")
+                    # Guardar contenido en la ruta local
+                    with open(local_path, "wb") as f:
+                        f.write(public_url_response)
+                    
+                    print(f"Imagen descargada correctamente en: {local_path}")
+
                     if public_url_response:
                         imagen_url_publica = public_url_response
                     else:
                         # Construir URL manualmente si el formato no es el esperado
                         imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
+                        print(f"BACKEND: imagen recibido: {public_url_response}")
+                
                 except Exception as url_error:
                     print(f"Error al obtener URL pública: {url_error}")
                     imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
@@ -195,6 +212,7 @@ class handler(BaseHTTPRequestHandler):
                     'imagen_url': imagen_url_publica,
                     'url_image_path_in_bucket': url_image # Para referencia en el frontend
                 })
+                print(f"BACKEND: responder recibido: {responder}")
 
         except Exception as error:
             # Si algo salió mal
