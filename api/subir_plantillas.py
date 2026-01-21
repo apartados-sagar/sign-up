@@ -1,6 +1,7 @@
 from http.server import BaseHTTPRequestHandler
 import json
 import os
+import tempfile # Importamos tempfile
 from supabase import create_client
 import cgi
 from typing import cast, IO, Any
@@ -60,9 +61,23 @@ class handler(BaseHTTPRequestHandler):
             case _:
                 return None
     
+    # buscar el genero
+    def buscar_genero(self, select_genero):
+        match select_genero:
+            case 'h':
+                return GENERO_HOMBRES
+            case 'm':
+                return GENERO_MUJERES
+            case _:
+                return None
+    
     def do_POST(self):
         """Cuando el navegador envía datos (POST)"""
         try:
+            # Usamos tempfile para asegurar que los archivos temporales se escriban en /tmp
+            # que es un directorio escribible en Vercel Serverless Functions.
+            cgi.FieldStorage.FieldStorageClass.TemporaryFile = tempfile.TemporaryFile
+
             form = cgi.FieldStorage(
                 fp=cast(IO[Any], self.rfile),
                 headers=self.headers,
@@ -73,15 +88,11 @@ class handler(BaseHTTPRequestHandler):
             accion = form.getvalue("accion")
             password = form.getvalue("contraseña")
             select_area = form.getvalue("select_area")
+            select_genero = form.getvalue("select_genero")
             url_image = form.getvalue("url_image")
             descripcion = form.getvalue("text_descripcion")
 
-            # --- DEBUG START ---
-            print(f"BACKEND DEBUG: select_area recibido: {select_area}")
-            print(f"BACKEND DEBUG: url_image recibida del frontend (en backend): {url_image}")
-            # --- DEBUG END ---
-
-            if not all([accion, password, select_area, url_image, descripcion]):
+            if not all([accion, password, select_area, select_genero, url_image, descripcion]):
                 self.responder({'error': 'Faltan campos requeridos'}, codigo=400)
                 return
 
@@ -135,12 +146,11 @@ class handler(BaseHTTPRequestHandler):
                 self.responder({'error': 'Área no válida'}, codigo=400)
                 return
 
-
-            # Carpeta local donde se guardará la imagen
-            local_folder = "/public/image/"  # Cambia según tu configuración
-            os.makedirs(local_folder, exist_ok=True)  # Crear carpeta si no existe
-            local_path = os.path.join(local_folder, filename)
-            
+            # Obtener el género
+            genero_path = self.buscar_genero(select_genero)
+            if not genero_path:
+                self.responder({'error': 'Género no válido'}, codigo=400)
+                return
 
             # Accion insertar la plantilla la base de datos
             if accion == 'insertar_plantilla':
@@ -150,6 +160,7 @@ class handler(BaseHTTPRequestHandler):
                 plantilla = supabase.table('imagenes').insert({
                     'select_area': select_area,
                     'cubo': bucket_name,
+                    'select_genero': select_genero,
                     'descripcion': descripcion,
                     'url_image': url_image
                 }).execute()
@@ -161,10 +172,11 @@ class handler(BaseHTTPRequestHandler):
                 # Obtener el ID del registro recién insertado para el rollback
                 # Asumiendo que el ID auto-incrementable se devuelve en plantilla.data
                 # Si no, deberías obtenerlo de otra manera o reconsiderar cómo manejas los IDs
-                inserted_id = plantilla.data[0]['id_camisas'] if 'id_camisas    ' in plantilla.data[0] else None
+                inserted_id = plantilla.data[0]['id_camisas'] if 'id_camisas' in plantilla.data[0] else None
 
                 # Subir la imagen al almacenamiento de Supabase
                 try:
+                    # La url_image del frontend ya es la ruta relativa dentro del bucket (ej: hombres/header.png)
                     upload_response = supabase.storage.from_(bucket_name).upload(
                         url_image,
                         file_data,
@@ -185,22 +197,12 @@ class handler(BaseHTTPRequestHandler):
                 imagen_url_publica = None
                 try:
                     # get_public_url devuelve la URL pública directamente
-                    public_url_response = supabase.storage.from_(bucket_name).douwload(url_image)
-                    
-                    print(f"BACKEND: imagen recibido: {public_url_response}")
-                    # Guardar contenido en la ruta local
-                    with open(local_path, "wb") as f:
-                        f.write(public_url_response)
-                    
-                    print(f"Imagen descargada correctamente en: {local_path}")
-
+                    public_url_response = supabase.storage.from_(bucket_name).get_public_url(url_image)
                     if public_url_response:
                         imagen_url_publica = public_url_response
                     else:
                         # Construir URL manualmente si el formato no es el esperado
                         imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
-                        print(f"BACKEND: imagen recibido: {public_url_response}")
-                
                 except Exception as url_error:
                     print(f"Error al obtener URL pública: {url_error}")
                     imagen_url_publica = f"{SUPABASE_URL}/storage/v1/object/public/{bucket_name}/{url_image}"
@@ -212,12 +214,10 @@ class handler(BaseHTTPRequestHandler):
                     'imagen_url': imagen_url_publica,
                     'url_image_path_in_bucket': url_image # Para referencia en el frontend
                 })
-                print(f"BACKEND: responder recibido: {responder}")
 
         except Exception as error:
             # Si algo salió mal
             self.responder({'error': f'Error del servidor: {str(error)}'}, codigo=500)
-            print(f"BACKEND: error recibido: {error}")
     
     def do_GET(self):
         """Cuando el navegador solo pide información (GET)"""

@@ -3,11 +3,14 @@ import json
 import os
 from supabase import create_client
 
-# Conectar con Supabase
-supabase = create_client(
-    os.environ.get('SUPABASE_URL'),
-    os.environ.get('SUPABASE_KEY')
-)
+SUPABASE_URL = os.environ.get("SUPABASE_URL")
+SUPABASE_KEY = os.environ.get("SUPABASE_KEY")
+
+if not SUPABASE_URL or not SUPABASE_KEY:
+    raise ValueError("SUPABASE_URL y SUPABASE_KEY deben estar configurados")
+
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
+
 
 class handler(BaseHTTPRequestHandler):
     

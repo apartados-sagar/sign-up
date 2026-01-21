@@ -5,8 +5,6 @@
   ],
   "python.analysis.autoImportCompletions": true,
   "python.analysis.typeCheckingMode": "basic",
-  "python.languageServer": "None",
-  "python.analysis.diagnosticMode": "workspace",
-  "python-envs.defaultEnvManager": "ms-python.python:system",
-  "python-envs.pythonProjects": []
+  "python.languageServer": "Pylance",
+  "python.analysis.diagnosticMode": "workspace"
 }

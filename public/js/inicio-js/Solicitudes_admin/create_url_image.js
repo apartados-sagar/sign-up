@@ -1,19 +1,38 @@
-export function create_url(select_genero, nombre){
-    // Nota: 'select_area' se usa para buscar el bucket, pero no se incluye en la URL del objeto.
+export function create_url(select_area, select_genero, nombre){
+    // switch para desbloquar el area camisas o pantalones ect.
+    let area;
     let genero;
+
+    switch (select_area) {
+        case "c_":
+            area = "camisas/";
+            break;
+        case "p_":
+            area = "pantalones/";
+            break;
+        case "j_":
+            area = "joyeria/";
+            break;
+        case "pr_":
+            area = "perfumeria/";
+            break;
+        default:
+            area = "area invalida"; 
+            return "error area";
+    }
 
     switch (select_genero) {
         case "h":
-            genero = "/hombres/";
+            genero = "hombres/";
             break;
         case "m":
-            genero = "/mujeres/";
+            genero = "mujeres/";
             break;
             
         default:
             genero = "genero invalido";
-            return "error genero"; // Cambié a 'error genero' ya que 'area' no se usa aquí directamente
+            return "error area";
     }
-    const url =  genero  + nombre; // Solo genero y nombre del archivo
+    const url =  area + genero  + nombre;
     return url;
 }

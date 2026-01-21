@@ -46,12 +46,13 @@ async function subirPlantilla() {
             return;
         }
         
-        const url_image = create_url(select_genero, nombre); // Genera la ruta relativa al bucket
+        const url_image = create_url(select_area, select_genero, nombre); // Genera la ruta relativa al bucket
 
         const formData = new FormData();
-        
+
         formData.append("accion", "insertar_plantilla");
         formData.append("select_area", select_area);
+        formData.append("select_genero", select_genero);
         formData.append("url_image", url_image);
         formData.append("text_descripcion", text_descripcion);
         formData.append("contraseña", password_base);
