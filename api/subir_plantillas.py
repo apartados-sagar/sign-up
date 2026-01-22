@@ -74,9 +74,6 @@ class handler(BaseHTTPRequestHandler):
     def do_POST(self):
         """Cuando el navegador envía datos (POST)"""
         try:
-            # Usamos tempfile para asegurar que los archivos temporales se escriban en /tmp
-            # que es un directorio escribible en Vercel Serverless Functions.
-            cgi.FieldStorage.FieldStorageClass.TemporaryFile = tempfile.TemporaryFile
 
             form = cgi.FieldStorage(
                 fp=cast(IO[Any], self.rfile),
@@ -172,7 +169,7 @@ class handler(BaseHTTPRequestHandler):
                 # Obtener el ID del registro recién insertado para el rollback
                 # Asumiendo que el ID auto-incrementable se devuelve en plantilla.data
                 # Si no, deberías obtenerlo de otra manera o reconsiderar cómo manejas los IDs
-                inserted_id = plantilla.data[0]['id_camisas'] if 'id_camisas' in plantilla.data[0] else None
+                
 
                 # Subir la imagen al almacenamiento de Supabase
                 try:
@@ -184,11 +181,7 @@ class handler(BaseHTTPRequestHandler):
                     )
                 except Exception as upload_error:
                     # Si falla el upload, intentar eliminar el registro de la BD
-                    if inserted_id:
-                        try:
-                            supabase.table('imagenes').delete().eq('id', inserted_id).execute()
-                        except Exception as delete_error:
-                            print(f"Error al revertir registro de BD: {delete_error}")
+                    
                     self.responder({'error': f'Error al subir imagen: {str(upload_error)}'}, codigo=500)
                     return
 
